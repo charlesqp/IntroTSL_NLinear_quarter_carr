@@ -1,0 +1,24 @@
+\begin{thebibliography}{2}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\urlprefix}{URL }
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi:\discretionary{}{}{}#1}\else
+  \providecommand{\doi}{doi:\discretionary{}{}{}\begingroup
+  \urlstyle{rm}\Url}\fi
+
+\bibitem[{Moore and Schneider(2001)}]{Moore2001SAESystems}
+Moore, S.W. and Schneider, P.J. (2001).
+\newblock {SAE TECHNICAL A Review of Cell Equalization Methods for Lithium Ion
+  and Lithium Polymer Battery Systems}.
+\newblock (724).
+
+\bibitem[{Parakkadavath and
+  Bhikkaji(2017)}]{Parakkadavath2017IdentificationFilter}
+Parakkadavath, S. and Bhikkaji, B. (2017).
+\newblock {Identification of the non-linear dynamics and state of charge
+  estimation of a LiFePO4 battery using constrained unscented Kalman filter}.
+\newblock In \emph{IFAC-PapersOnLine}, volume~50, 1571--1576. Elsevier B.V.
+\newblock \doi{10.1016/j.ifacol.2017.08.311}.
+
+\end{thebibliography}

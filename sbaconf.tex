@@ -1,0 +1,103 @@
+% !TEX root = sbaconf.tex
+%===============================================================================
+% $Id: ifacconf.tex 19 2011-10-27 09:32:13Z jpuente $  
+% Template for IFAC meeting papers
+% Copyright (c) 2007-2008 International Federation of Automatic Control
+%===============================================================================
+\documentclass[a4paper]{ifacconf}
+
+\usepackage{graphicx,amsmath,url}      % include this line if your document contains figures
+\usepackage[round]{natbib}             % required for bibliography
+%===============================================================================
+
+% If in Portuguese or Spanish, choose
+\def\portugues{1} 
+\usepackage[spanish,brazil,english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{unicode}
+\usepackage{ae}
+\usepackage{placeins}
+
+\if\portugues1
+% =====================================================================
+% =====================================================================
+% If the manuscript is in Spanish, please change the texts adequatelly.
+% You may also add other definitions in this part.
+ \newtheorem{teorema}[thm]{{\em Teorema}}{ }
+ \newtheorem{lema}[thm]{{\em Lema}}{ }
+ \newtheorem{corolario}[thm]{{\em Corolário}}{ }
+ \newenvironment{prova}{{\bf Prova.}}{ }
+% ===============================================================
+\fi
+
+\begin{document}
+	
+    \selectlanguage{brazil}
+	
+    \begin{frontmatter}
+        
+        \title{Trabalho computacional \\Teoria de Sistemas Lineares \\Síntese de observador e controlador por realimentação de estados para controle de suspensão veicular ativa, não-linear, através de amortecedor magneto-reológico como atuador} 
+
+        \author[First]{Charles Quirino Pimenta} 
+        
+        \address[First]{Universidade Federal de Minas Gerais, Programa de Pós-Graduação em Engenharia Elétrica, (e-mail:charlesqp@ufmg.br).}
+        
+        \selectlanguage{english}
+        \renewcommand{\abstractname}{{\bf Abstract:~}}
+        \begin{abstract} Colocar o abstract em ingles aqui
+        
+        \vskip 1mm% não altere esse espaçamento
+        \selectlanguage{brazil}
+        {\noindent \bf Resumo}:Colocar o abstract em português aqui
+        \end{abstract}
+        
+        \selectlanguage{english}
+        
+        \begin{keyword} Colocar palavres chave em ingles aqui 
+        
+        \vskip 1mm% não altere esse espaçamento
+        \selectlanguage{brazil}
+        {\noindent\it Palavras-chaves:} Colocar palavres chave em português aqui 
+        \end{keyword}
+        
+        \selectlanguage{brazil}
+        
+        \end{frontmatter}
+
+    \section{Introdução}
+    Em sistemas veiculares automotores é necessário controlar as vibrações de sistemas mecânicos com a finalidade de minimizar as vibrações transmitidas ao chassi do veículo e proporcionar maior conforto aos seus utilizadores.
+    Em veículos é necessário realizar o controle de vibrações transmitidas pela pista, uma vez que estas causam desconforto aos passageiros e diminuem o contato entre pneu e pista, e diminuem a estabilidade do veículo.
+    Existem três tipos de suspensão veicular: suspensão passiva, ativa e semiativa. Esta classificação é dada de acordo com a presença e o tipo de controle utilizado para minimizar as vibrações transmitidas ao chassi.
+    Sistemas de controle passivo são os sistemas de suspensão convencionais, são compostos por molas, amortecedores e pneus. O sistema de controle passivo só é capaz de atuar em uma banda de frequência restrita, limitando-se a utilização em sistemas com frequências fora desta banda. Este sistema proporciona uma viagem menos confortável e estável ao carro em comparação aos sistemas de amortecimento ativo e semiativo.
+    Um sistema de suspensão ativa é um sistema capaz de atuar em diferentes bandas de frequência, através da utilização de atuadores, sensores e sistemas eletrônicos de controle. A sua desvantagem está na elevada quantidade de energia que os componentes utilizados necessitam, necessitando do uso de uma fonte de energia externa, isto implica em um produto final de custo mais elevado quando comparado com sistemas de suspensão passiva.
+    Um sistema de suspensão semiativa também apresenta funcionalidade em diversas bandas de frequência e não possui a obrigatoriedade de uma fonte de tensão externa permanente de grande porte. Outra vantagem deste tipo de sistema é que este, na falta de energia, comporta-se como um sistema passivo, agregando mais confiabilidade e segurança ao veículo. Por fim, um sistema de suspensão semiativa possui custo intermediário entre as demais opções.
+    Neste trabalho, focou-se sobre o sistema de suspensão semiativa com atuador Magneto-Reológico (MR). Esta categoria de amortecedores/atuadores são baseados em fluídos magneto-reológicos, tecnologia esta que se encontram disponíveis comercialmente em escala industrial e são utilizados em todo o mundo por diversas montadoras de veículos.
+    Este trabalho apresentará a implementação de um controlador semiativo \emph{skyhook} aplicado a um sistema de suspensão veicular com modelo não linear com atuador MR.
+    \section{Objetivos}
+    Projetar e analisar um observador e um controlador por realimentação no espaço de estados para o modelo linearizado de um sistema de suspensão veicular ativa, não-linear, através do controle da amplitude de deslocamento vertical e dos níveis de aceleração, aos quais os passageiros estão submetidos, empregando para esta finalidade um amortecedor magneto-reológico como atuador. 
+    Para alcançar o objetivo principal, os seguintes objetivos específicos foram propostos:
+    \begin{itemize}
+        \item Realizar a modelagem matemática de um sistema de suspensão não linear de um quarto de veículo com dois graus de liberdade
+        \item Realizar a modelagem matemática da dinâmica do amortecedor MR
+        \item Realizar a linearização do modelo completo proposto
+        \item Projetar um observador de estados para a estimação das variáveis de estados necessárias para o funcionamento da estratégia de controle skyhook
+        \item Projetar um controlador skyhook de forma a aumentar o nível de conforto e/ou dirigibilidade do veículo
+        \item Realizar simulações temporais com o controlador proposto para o sistema linearizado e original.
+    \end{itemize}
+    \section{Revisão Bibliográfica}
+    \subsection{Modelo matemático do sistema de suspensão não linear para um quarto de veículo }
+    O modelo de um quarto de carro consiste em isolar uma quarta parte do veiculo e estudar isoladamente o comportamento do sistema de suspensão para esta seção. Para veículos com peso igualmente distribuído, os resultados são muito próximos ao do modelo completo. Geralmente os modelos para um quarto de carro tem 2 graus de liberdade, sendo estes o deslocamento vertical da massa suspensa e da massa não suspensa.
+    \section{Metodologia}
+    \section{Resultados}
+    \section{Conclusão}
+    
+    \bibliography{references,manual}
+    
+    \appendix
+    \section{Lista de siglas e abreviações}
+    \begin{itemize} 
+        \item [ ] \emph{MR} Magneto Reológico
+    \end{itemize}
+    
+\end{document}
