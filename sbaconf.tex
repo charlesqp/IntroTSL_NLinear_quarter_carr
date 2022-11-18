@@ -81,13 +81,44 @@
         \item Realizar a modelagem matemática de um sistema de suspensão não linear de um quarto de veículo com dois graus de liberdade
         \item Realizar a modelagem matemática da dinâmica do amortecedor MR
         \item Realizar a linearização do modelo completo proposto
-        \item Projetar um observador de estados para a estimação das variáveis de estados necessárias para o funcionamento da estratégia de controle skyhook
-        \item Projetar um controlador skyhook de forma a aumentar o nível de conforto e/ou dirigibilidade do veículo
+        \item Projetar um observador de estados para a estimação das variáveis de estados necessárias para o funcionamento da estratégia de controle \emph{skyhook}
+        \item Projetar um controlador \emph{skyhook} de forma a aumentar o nível de conforto e/ou dirigibilidade do veículo
         \item Realizar simulações temporais com o controlador proposto para o sistema linearizado e original.
     \end{itemize}
     \section{Revisão Bibliográfica}
     \subsection{Modelo matemático do sistema de suspensão não linear para um quarto de veículo }
-    O modelo de um quarto de carro consiste em isolar uma quarta parte do veiculo e estudar isoladamente o comportamento do sistema de suspensão para esta seção. Para veículos com peso igualmente distribuído, os resultados são muito próximos ao do modelo completo. Geralmente os modelos para um quarto de carro tem 2 graus de liberdade, sendo estes o deslocamento vertical da massa suspensa e da massa não suspensa.
+    O modelo de um quarto de carro consiste em isolar uma quarta parte do veiculo e estudar isoladamente o comportamento do sistema de suspensão para esta seção. Para veículos com peso igualmente distribuído, os resultados são muito próximos ao do modelo completo. Geralmente os modelos para um quarto de carro tem 2 graus de liberdade, sendo estes o deslocamento vertical da massa suspensa e da massa não suspensa. Este modelo pode ser observado na figura \ref{fig:massa_mola_nao_linear_controlavel} a seguir. Este modelo é composto por uma massa suspensa que representa a carroceria do veiculo e uma massa não suspensa que representa o conjunto eixo e roda. Estas massas são conectadas pela mola e pelo amortecedor. O contato do veiculo com a pista de rolamento é realizado através do pneu. O sistema é exitado, ou perturbado, pelas irregularidades da pista.
+    \FloatBarrier
+    \begin{figure}[htbp]
+        \begin{centering}
+            \includegraphics[width=5cm]{img/massa_mola_nao_linear_controlavel.png}
+            \caption{Modelo de suspensão para um quarto de carro.} 
+            \label{fig:massa_mola_nao_linear_controlavel}
+        \end{centering}
+    \end{figure}
+    \FloatBarrier
+    Na figura \ref{fig:massa_mola_nao_linear_controlavel} temos que $m_s$ representa a massa suspensa que consiste em um quarto da massa total da carroceria do veiculo em \emph{kg}, $m_u$ representa a massa não suspensa ou a massa do eixo e da roda em \emph{kg}, $b_s$ representa o o coeficiente de amortecimento do amortecedor passivo em \emph{Ns/m}, $k_s$ representa o coeficiente de elasticidade do feixe de molas da suspensão, segundo a lei de hooke, em \emph{N/m}, $k_t$ representa o coeficiente de elasticidade do pneu, segundo a lei de hooke, em \emph{N/m}, $x_r$ representa o deslocamento vertical da pista, onde o sufixo $r$ significa \emph{road}, em \emph{m}, $x_w$ representa o deslocamento vertical da roda, onde o sufixo $w$ significa \emph{wheel}, em \emph{m} e $x_c$ representa o deslocamento vertical da carroceria, onde o sufixo $c$ significa \emph{carr}, em \emph{m}. Na mesma figura o simbolo $F$ representa a atuação de um dispositivo amortecedor com características dinâmicas, seja ele ativo ou semi-ativo, em \emph{N}.
+    
+    O diagrama de corpo livre do sistema pode ser construído tomando-se como referencia a coordenada da posição do eixo da roda $x_w$ como pode ser observado nas figuras \ref{fig:corpo_livre_ms} e \ref{fig:corpo_livre_mu} abaixo
+    \FloatBarrier
+    \begin{figure}[htbp]
+        \begin{centering}
+            \includegraphics[width=5cm]{img/massa_mola_nao_linear_controlavel.png}
+            \caption{Modelo de suspensão para um quarto de carro.} 
+            \label{fig:corpo_livre_ms}
+        \end{centering}
+    \end{figure}
+    \FloatBarrier
+    \FloatBarrier
+    \begin{figure}[htbp]
+        \begin{centering}
+            \includegraphics[width=5cm]{img/massa_mola_nao_linear_controlavel.png}
+            \caption{Modelo de suspensão para um quarto de carro.} 
+            \label{fig:corpo_livre_mu}
+        \end{centering}
+    \end{figure}
+    \FloatBarrier
+        
     \section{Metodologia}
     \section{Resultados}
     \section{Conclusão}
@@ -97,7 +128,17 @@
     \appendix
     \section{Lista de siglas e abreviações}
     \begin{itemize} 
-        \item [ ] \emph{MR} Magneto Reológico
+        \item [\emph{MR}] Magneto Reológico.
+        \item [$m_s$] Massa suspensa.
+        \item [$m_u$] Massa não suspensa.
+        \item [$b_s$] Coeficiente de amortecimento do amortecedor passivo. 
+        \item [$k_s$] Coeficiente de elasticidade do feixe de molas da suspensão.
+        \item [$k_t$] Coeficiente de elasticidade do pneu.
+        \item [$x_r$] Deslocamento vertical da pista.
+        \item [$x_w$] Deslocamento vertical da roda.
+        \item [$x_c$] Deslocamento vertical da carroceria.
+        \item [$F$] Força aplicada pelo amortecedor ativo ou semi-ativo.
+         
     \end{itemize}
     
 \end{document}
