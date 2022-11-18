@@ -41,7 +41,8 @@
 
         \author[First]{Charles Quirino Pimenta} 
         
-        \address[First]{Universidade Federal de Minas Gerais, Programa de Pós-Graduação em Engenharia Elétrica, (e-mail:charlesqp@ufmg.br).}
+        \address[First]{Programa de Pós-Graduação em Engenharia Elétrica - Universidade Federal de 
+Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\ e-mail:charlesqp@ufmg.br.}
         
         \selectlanguage{english}
         \renewcommand{\abstractname}{{\bf Abstract:~}}
@@ -109,7 +110,6 @@
         \end{centering}
     \end{figure}
     \FloatBarrier
-    \FloatBarrier
     \begin{figure}[htbp]
         \begin{centering}
             \includegraphics[width=5cm]{img/corpo_livre_mu.png}
@@ -152,14 +152,31 @@
     
         \begin{equation} \label{eq:massa_mola_nao_linear}
         \begin{aligned}
-         m_{s} \ddot{x}_{c} =&k^{l}_{s}(x_{w}-x_{c})+k^{nl}_{s}(x_{w}-x_{c})^{3}+b^{l}_{s}(\dot{x}_{w}-\dot{x}_{c})\\
+         m_{s} \ddot{x}_{c} =\ \ &k^{l}_{s}(x_{w}-x_{c})+k^{nl}_{s}(x_{w}-x_{c})^{3}+b^{l}_{s}(\dot{x}_{w}-\dot{x}_{c})\\
                             -&b^{y}_{s}\mid\dot{x}_{w}-\dot{x}_{c}\mid+b^{nl}_{s}\sqrt{\mid\dot{x}_{w}-\dot{x}_{c}\mid}sgn(\dot{x}_{w}-\dot{x}_{c})\\ 
                             -&F\\
-         m_{u} \ddot{x}_{w} =&-k^{l}_{s}(x_{w}-x_{c})-k^{nl}_{s}(x_{w}-x_{c})^{3}-k_{t}(x_{w}-x_{r})\\ 
-                            -&b^{l}_{s}(\dot{x}_{w}-\dot{x}_{c}) \\
-                            +&F\\
+         m_{u} \ddot{x}_{w} =-&k^{l}_{s}(x_{w}-x_{c})-k^{nl}_{s}(x_{w}-x_{c})^{3}-k_{t}(x_{w}-x_{r})\\ 
+                            -&b^{l}_{s}(\dot{x}_{w}-\dot{x}_{c})+b^{y}_{s}\mid\dot{x}_{w}-\dot{x}_{c}\mid\\
+                            -&b^{nl}_{s}\sqrt{\mid\dot{x}_{w}-\dot{x}_{c}\mid}sgn(\dot{x}_{w}-\dot{x}_{c})+F\\
         \end{aligned}
     \end{equation}
+    
+    \subsection{Amortecedor Magneto-Reológico}
+    Os fluídos magneto-reológicos fazem parte da classificação de fluídos controláveis, sua principal característica, quando expostos a uma variação de campo magnético, é a habilidade de transitar do estado líquido viscoso para semissólido em um intervalo de tempo da ordem de  milissegundos como é demonstrado na figura {} abaixo.
+    
+    \FloatBarrier
+    \begin{figure}[htbp]
+        \begin{centering}
+            \includegraphics[width=5cm]{img/corpo_livre_ms.png}
+            \caption{Diagrama de corpo livre para a massa $m_s$.} 
+            \label{fig:corpo_livre_ms}
+        \end{centering}
+    \end{figure}
+    \FloatBarrier
+    
+    Estas características dos fluídos MR os fazem bastantes interessantes quando aplicados em sistemas mecânicos, devido ao fato destes apresentarem uma arquitetura simples e uma rápida resposta quando fazem interface entre controladores eletrônicos.
+    
+    Na figura \ref{} a seguir é exibida a curva característica de força-velocidade de um amortecedor MR em função da corrente aplicada às bobinas geradoras de campo
  
     \section{Metodologia}
     \section{Resultados}
