@@ -99,12 +99,12 @@
     \FloatBarrier
     Na figura \ref{fig:massa_mola_nao_linear_controlavel} temos que $m_s$ representa a massa suspensa que consiste em um quarto da massa total da carroceria do veiculo em \emph{kg}, $m_u$ representa a massa não suspensa ou a massa do eixo e da roda em \emph{kg}, $b_s$ representa o o coeficiente de amortecimento do amortecedor passivo em \emph{Ns/m}, $k_s$ representa o coeficiente de elasticidade do feixe de molas da suspensão, segundo a lei de hooke, em \emph{N/m}, $k_t$ representa o coeficiente de elasticidade do pneu, segundo a lei de hooke, em \emph{N/m}, $x_r$ representa o deslocamento vertical da pista, onde o sufixo $r$ significa \emph{road}, em \emph{m}, $x_w$ representa o deslocamento vertical da roda, onde o sufixo $w$ significa \emph{wheel}, em \emph{m} e $x_c$ representa o deslocamento vertical da carroceria, onde o sufixo $c$ significa \emph{carr}, em \emph{m}. Na mesma figura o simbolo $F$ representa a atuação de um dispositivo amortecedor com características dinâmicas, seja ele ativo ou semi-ativo, em \emph{N}.
     
-    O diagrama de corpo livre do sistema pode ser construído tomando-se como referencia a coordenada da posição do eixo da roda $x_w$ como pode ser observado nas figuras \ref{fig:corpo_livre_ms} e \ref{fig:corpo_livre_mu} abaixo
+    O diagrama de corpo livre do sistema pode ser construído tomando-se como referencia a coordenada da posição do eixo da roda $x_w$ como pode ser observado nas figuras \ref{fig:corpo_livre_ms} e \ref{fig:corpo_livre_mu} a seguir:
     \FloatBarrier
     \begin{figure}[htbp]
         \begin{centering}
-            \includegraphics[width=5cm]{img/massa_mola_nao_linear_controlavel.png}
-            \caption{Modelo de suspensão para um quarto de carro.} 
+            \includegraphics[width=5cm]{img/corpo_livre_ms.png}
+            \caption{Diagrama de corpo livre para a massa $m_s$.} 
             \label{fig:corpo_livre_ms}
         \end{centering}
     \end{figure}
@@ -112,13 +112,55 @@
     \FloatBarrier
     \begin{figure}[htbp]
         \begin{centering}
-            \includegraphics[width=5cm]{img/massa_mola_nao_linear_controlavel.png}
-            \caption{Modelo de suspensão para um quarto de carro.} 
+            \includegraphics[width=5cm]{img/corpo_livre_mu.png}
+            \caption{Diagrama de corpo livre para a massa $m_u$.} 
             \label{fig:corpo_livre_mu}
         \end{centering}
     \end{figure}
     \FloatBarrier
+    
+    Aplicando a segunda lei de Newton $\sum{F}=m.a$, a cada uma das massas separadamente, o sistema para o modelo de um quarto de carro da figura \ref{fig:massa_mola_nao_linear_controlavel} pode ser representado pela seguinte equação:
+    
+    \begin{equation} \label{eq:massa_mola_linear}
+    \begin{split}
+        m_{s} \ddot{x}_{c} =&  b_{s}(\dot{x}_{w}-\dot{x}_{c}) + k_{s}(x_{w}-x_{c}) - F\ \\
+        m_{u} \ddot{x}_{w} =& -b_{s}(\dot{x}_{w}-\dot{x}_{c}) - k_{s}(x_{w}-x_{c})  k_{t}(x_{w}-x_{r}) + F
+    \end{split}
+    \end{equation}
+    
+    A equação \ref{eq:massa_mola_linear} representa o modelo do sistema na forma linear. Porém a mola $k_s$, o amortecedor $b_s$ e o amortecedor dinâmico ativo podem ser modelados através de modelos lineares ou modelos não lineares. \\
+    Uma mola linear obedece a lei de Hooke apresentando uma deformação proporcional ao carregamento. Em uma mola não linear o coeficiente de elasticidade da mola cresce exponencialmente conforme se afasta do ponto de equilíbrio estático.
+    Para um modelo de mola não linear, podemos utilizar seguinte expressão para a força da mola $ k_{s}(x_{w}-x_{c})$:
+    
+    \begin{equation} \label{eq:mola_nao_linear}
+        k_{s}(x_{w}-x_{c}) = k^{l}_{s}(x_{w}-x_{c})+k^{nl}_{s}(x_{w}-x_{c})^{3}
+    \end{equation}
         
+    Na equação \ref{eq:mola_nao_linear} o coeficiente $k^{l}_{s}$ representa o coeficiente de elasticidade do termo da faixa de operação linear e o coeficiente $k^{nl}_{s}$] representa o coeficiente de elasticidade do termo da faixa de operação não linear do feixe de molas em uma situação real.\\
+    A não linearidade do amortecedor permite que pequenos movimentos causados pelo perfil da estrada gerem apenas um pequeno impacto na carroceria além de apresentar saturação e histerese. Para um modelo de amortecedor não linear, podemos utilizar a seguinte expressão:
+ 
+    \begin{equation} \label{eq:amortecedor_nao_linear}
+        \begin{aligned}
+        b_{s}(\dot{x}_{w}-\dot{x}_{c}) =\ \ &b^{l}_{s}(\dot{x}_{w}-\dot{x}_{c}) - b^{y}_{s}\mid\dot{x}_{w}-\dot{x}_{c}\mid \\
+        + &b^{nl}_{s}\sqrt{\mid\dot{x}_{w}-\dot{x}_{c}\mid}sgn(\dot{x}_{w}-\dot{x}_{c})  
+        \end{aligned}
+    \end{equation}
+    
+    Na equação \ref{eq:amortecedor_nao_linear} o coeficiente $b^{l}_{s}$ representa o coeficiente de amortecimento do termo da faixa de operação linear, o coeficiente $b^{l}_{s}$ representa o coeficiente de amortecimento do termo da faixa de operação não linear e o coeficiente $b^{y}_{s}$ representa a característica de comportamento assimétrico do amortecedor.
+    
+    Substituindo as equações \ref{eq:mola_nao_linear} e \ref{eq:amortecedor_nao_linear} em \ref{eq:massa_mola_linear} obtemos as seguintes equações diferenciais dinâmicas de segunda ordem que representam a dinâmica de um sistema de suspensão ativa não linear:
+    
+        \begin{equation} \label{eq:massa_mola_nao_linear}
+        \begin{aligned}
+         m_{s} \ddot{x}_{c} =&k^{l}_{s}(x_{w}-x_{c})+k^{nl}_{s}(x_{w}-x_{c})^{3}+b^{l}_{s}(\dot{x}_{w}-\dot{x}_{c})\\
+                            -&b^{y}_{s}\mid\dot{x}_{w}-\dot{x}_{c}\mid+b^{nl}_{s}\sqrt{\mid\dot{x}_{w}-\dot{x}_{c}\mid}sgn(\dot{x}_{w}-\dot{x}_{c})\\ 
+                            -&F\\
+         m_{u} \ddot{x}_{w} =&-k^{l}_{s}(x_{w}-x_{c})-k^{nl}_{s}(x_{w}-x_{c})^{3}-k_{t}(x_{w}-x_{r})\\ 
+                            -&b^{l}_{s}(\dot{x}_{w}-\dot{x}_{c}) \\
+                            +&F\\
+        \end{aligned}
+    \end{equation}
+ 
     \section{Metodologia}
     \section{Resultados}
     \section{Conclusão}
@@ -138,7 +180,11 @@
         \item [$x_w$] Deslocamento vertical da roda.
         \item [$x_c$] Deslocamento vertical da carroceria.
         \item [$F$] Força aplicada pelo amortecedor ativo ou semi-ativo.
-         
+        \item [$k^{l}_{s}$] Coeficiente de elasticidade do termo linear no modelo não linear do feixe de molas da suspensão.
+        \item [$k^{nl}_{s}$] Coeficiente de elasticidade do termo não linear no modelo não linear do feixe de molas da suspensão.
+        \item [$b^{l}_{s}$] Coeficiente de amortecimento do termo da faixa de operação linear do amortecedor.
+        \item [$b^{l}_{s}$] Coeficiente de amortecimento do termo da faixa de operação não linear do amortecedor.
+        \item [$b^{y}_{s}$] Coeficiente que representa a característica  de comportamento assimétrico do amortecedor.
     \end{itemize}
     
 \end{document}
