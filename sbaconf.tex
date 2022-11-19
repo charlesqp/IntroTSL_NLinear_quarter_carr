@@ -162,21 +162,37 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
     \end{equation}
     
     \subsection{Amortecedor Magneto-Reológico}
-    Os fluídos magneto-reológicos fazem parte da classificação de fluídos controláveis, sua principal característica, quando expostos a uma variação de campo magnético, é a habilidade de transitar do estado líquido viscoso para semissólido em um intervalo de tempo da ordem de  milissegundos como é demonstrado na figura {} abaixo.
+    Os fluídos magneto-reológicos são um tipo de fluído controlável, sua principal característica é sua habilidade de transitar do estado líquido viscoso para semissólido quando expostos a uma variação de campo magnético em um intervalo de tempo de  milissegundos. Essa característica é demonstrado na figura \ref{fig:fluido_MR} abaixo.
     
     \FloatBarrier
     \begin{figure}[htbp]
         \begin{centering}
-            \includegraphics[width=5cm]{img/corpo_livre_ms.png}
-            \caption{Diagrama de corpo livre para a massa $m_s$.} 
-            \label{fig:corpo_livre_ms}
+            \includegraphics[width=8cm]{img/fluido_MR.png}
+            \caption{Etapas do funcionamento do fluído MR quando exposto a um campo magnético} 
+            \label{fig:fluido_MR}
         \end{centering}
     \end{figure}
     \FloatBarrier
     
-    Estas características dos fluídos MR os fazem bastantes interessantes quando aplicados em sistemas mecânicos, devido ao fato destes apresentarem uma arquitetura simples e uma rápida resposta quando fazem interface entre controladores eletrônicos.
+    Pode-se observar na figura \ref{fig:fluido_MR}.1 que, na ausência de um campo magnético, as partículas ferromagnéticas encontradas na estrutura do fluído MR se apresentam todas dispersas e em desordem. Em \ref{fig:fluido_MR}.2 pode-se notar que,ao aplicar um campo magnético, este provoca a magnetização das partículas ferromagnéticas presentes no fluido. Estas partículas adquirem um momento dipolo alinhado ao campo magnético aplicado. Em \ref{fig:fluido_MR}.3 é possível notar que as partículas ferromagnéticas magnetizadas criam cadeias lineares paralelas ao campo aplicado, estes campos paralelos criam uma força coesiva entre as partículas e gera resistência ao movimento do fluído. Finalmente em \ref{fig:fluido_MR}.5 o campo magnético é retirado e observa-se que as partículas retornam ao seu estado inicial sem remanência. \\
+    Estas características dos fluídos MR os fazem bastantes interessantes quando aplicados em sistemas mecânicos, devido ao fato destes apresentarem uma arquitetura simples e uma rápida resposta quando fazem interface entre controladores eletrônicos.\\
+    Existem basicamente três tipos de Geometria para os amortecedores magneto-reológicos: Amortecedores do tipo monotubo, tipo duplo tubo e tipo haste dupla. Este trabalho se limitará a descrever o tipo mais comum de amortecedor utilizado na industria automotiva que é o amortecedor de tipo monotubo.
+    A geometria de amortecedor do tipo monotubo é a mais utilizada entre os amortecedores MR, ela é constituída por quatro elementos principais: um cilindro fechado em uma das extremidades que contém o fluído MR. Um êmbolo, que acomoda a bobina eletromagnética, e se localiza no interior do tubo com capacidade de se deslocar no sentido axial deste. Um acumulador de pressão que contém um gás inerte, tipicamente Nitrogênio, sob pressão de aproximadamente 20 bar e por fim uma haste que faz conexão mecânica com o sistema de suspensão veicular. Existem também outros elementos de conexão e vedação comuns e necessários ao funcionamento do amortecedor, estes porém, não serão comentados neste trabalho. Um amortecedor do tipo monotubo pode ainda possuir duas configurações distintas: Na primeira configuração o êmbolo do amortecedor possui furos passantes que realizam a comunicação do fluido entre as duas câmaras formadas pelos espaços criados no tubo, adiante e a posteriori do êmbolo. A segunda configuração é em corte, onde o fluido se desloca entre as câmaras através de uma folga lateral existente entre o embolo e o tubo. A geometria do tipo monotubo é apresentada adiante na figura 14:
     
-    Na figura \ref{} a seguir é exibida a curva característica de força-velocidade de um amortecedor MR em função da corrente aplicada às bobinas geradoras de campo
+    
+    
+    Na figura \ref{fig:curva_amortecedor_MR} a seguir é exibida a curva característica de força-velocidade de um amortecedor dinâmico semi-ativo construído empregando um fluido MR. A força de resposta do amortecedor é exibida como uma função da corrente aplicada às bobinas geradoras de campo e da velocidade de deslocamento do êmbolo:
+    
+    \FloatBarrier
+    \begin{figure}[htbp]
+        \begin{centering}
+            \includegraphics[width=8cm]{img/curva_amortecedor_MR.png}
+            \caption{Família de curvas características da força-velocidade de um amortecedor MR em função da corrente aplicada} 
+            \label{fig:curva_amortecedor_MR}
+        \end{centering}
+    \end{figure}
+    \FloatBarrier
+    
  
     \section{Metodologia}
     \section{Resultados}
