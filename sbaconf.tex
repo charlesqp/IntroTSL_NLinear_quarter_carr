@@ -81,6 +81,7 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
     \begin{itemize}
         \item Realizar a modelagem matemática de um sistema de suspensão não linear de um quarto de veículo com dois graus de liberdade
         \item Realizar a modelagem matemática da dinâmica do amortecedor MR
+        \item Realizar a construção do modelo completo de um sistema de suspensão semi-ativa, não linear, de um quarto de veículo com dois graus de liberdade empregando amortecedor MR.
         \item Realizar a linearização do modelo completo proposto
         \item Projetar um observador de estados para a estimação das variáveis de estados necessárias para o funcionamento da estratégia de controle \emph{skyhook}
         \item Projetar um controlador \emph{skyhook} de forma a aumentar o nível de conforto e/ou dirigibilidade do veículo
@@ -177,23 +178,71 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
     Pode-se observar na figura \ref{fig:fluido_MR}.1 que, na ausência de um campo magnético, as partículas ferromagnéticas encontradas na estrutura do fluído MR se apresentam todas dispersas e em desordem. Em \ref{fig:fluido_MR}.2 pode-se notar que,ao aplicar um campo magnético, este provoca a magnetização das partículas ferromagnéticas presentes no fluido. Estas partículas adquirem um momento dipolo alinhado ao campo magnético aplicado. Em \ref{fig:fluido_MR}.3 é possível notar que as partículas ferromagnéticas magnetizadas criam cadeias lineares paralelas ao campo aplicado, estes campos paralelos criam uma força coesiva entre as partículas e gera resistência ao movimento do fluído. Finalmente em \ref{fig:fluido_MR}.5 o campo magnético é retirado e observa-se que as partículas retornam ao seu estado inicial sem remanência. \\
     Estas características dos fluídos MR os fazem bastantes interessantes quando aplicados em sistemas mecânicos, devido ao fato destes apresentarem uma arquitetura simples e uma rápida resposta quando fazem interface entre controladores eletrônicos.\\
     Existem basicamente três tipos de Geometria para os amortecedores magneto-reológicos: Amortecedores do tipo monotubo, tipo duplo tubo e tipo haste dupla. Este trabalho se limitará a descrever o tipo mais comum de amortecedor utilizado na industria automotiva que é o amortecedor de tipo monotubo.
-    A geometria de amortecedor do tipo monotubo é a mais utilizada entre os amortecedores MR, ela é constituída por quatro elementos principais: um cilindro fechado em uma das extremidades que contém o fluído MR. Um êmbolo, que acomoda a bobina eletromagnética, e se localiza no interior do tubo com capacidade de se deslocar no sentido axial deste. Um acumulador de pressão que contém um gás inerte, tipicamente Nitrogênio, sob pressão de aproximadamente 20 bar e por fim uma haste que faz conexão mecânica com o sistema de suspensão veicular. Existem também outros elementos de conexão e vedação comuns e necessários ao funcionamento do amortecedor, estes porém, não serão comentados neste trabalho. Um amortecedor do tipo monotubo pode ainda possuir duas configurações distintas: Na primeira configuração o êmbolo do amortecedor possui furos passantes que realizam a comunicação do fluido entre as duas câmaras formadas pelos espaços criados no tubo, adiante e a posteriori do êmbolo. A segunda configuração é em corte, onde o fluido se desloca entre as câmaras através de uma folga lateral existente entre o embolo e o tubo. A geometria do tipo monotubo é apresentada adiante na figura 14:
+    A geometria de amortecedor do tipo monotubo é a mais utilizada entre os amortecedores MR, ela é constituída por quatro elementos principais: um cilindro fechado em uma das extremidades que contém o fluído MR. Um êmbolo, que acomoda a bobina eletromagnética, e se localiza no interior do tubo com capacidade de se deslocar no sentido axial deste. Um acumulador de pressão que contém um gás inerte, tipicamente Nitrogênio, sob pressão de aproximadamente 20 bar e por fim uma haste que faz conexão mecânica com o sistema de suspensão veicular. Existem também outros elementos de conexão e vedação comuns e necessários ao funcionamento do amortecedor, estes porém, não serão comentados neste trabalho. Um amortecedor do tipo monotubo pode ainda possuir duas configurações distintas: Na primeira configuração o êmbolo do amortecedor possui furos passantes que realizam a comunicação do fluido entre as duas câmaras formadas pelos espaços criados no tubo, adiante e a posteriori do êmbolo. A segunda configuração é em corte, onde o fluido se desloca entre as câmaras através de uma folga lateral existente entre o embolo e o tubo. A geometria do tipo monotubo é apresentada adiante na figura \ref{fig:amortecedor_MR_monotubo}:
     
-    
+    \FloatBarrier
+    \begin{figure}[htbp]
+        \begin{centering}
+            \includegraphics[width=6cm]{img/amortecedor_MR_monotubo.png}
+            \caption{Geometria monotubo com funcionamento em modo válvula a esquerda e modo corte a direita} 
+            \label{fig:amortecedor_MR_monotubo}
+        \end{centering}
+    \end{figure}
+    \FloatBarrier
     
     Na figura \ref{fig:curva_amortecedor_MR} a seguir é exibida a curva característica de força-velocidade de um amortecedor dinâmico semi-ativo construído empregando um fluido MR. A força de resposta do amortecedor é exibida como uma função da corrente aplicada às bobinas geradoras de campo e da velocidade de deslocamento do êmbolo:
     
     \FloatBarrier
     \begin{figure}[htbp]
         \begin{centering}
-            \includegraphics[width=8cm]{img/curva_amortecedor_MR.png}
+            \includegraphics[width=6cm]{img/curva_amortecedor_MR.png}
             \caption{Família de curvas características da força-velocidade de um amortecedor MR em função da corrente aplicada} 
             \label{fig:curva_amortecedor_MR}
         \end{centering}
     \end{figure}
     \FloatBarrier
     
+    A força realizada pelo amortecedor magneto-reológico pode ser descrita através da equação \ref{eq:forca_amortecedor_MR} a seguir:
+    
+    \begin{equation} \label{eq:forca_amortecedor_MR}
+    \begin{aligned}
+    \dot{z}=&(\dot{x}_{w}-\dot{x}_{c})-\sigma_{0}.a_{0}.|\dot{x}_{w}-\dot{x}_{c}|.z\\ 
+    F=&\sigma_{a}.z +\sigma_{0}.z.\nu+\sigma_{1}.\dot{z}+\sigma_{2}.(\dot{x}_{w}-\dot{x}_{c})+\sigma_{b}.(\dot{x}_{w}-\dot{x}_{c}).\nu
+    \end{aligned}
+    \end{equation}
  
+    Em que:
+    
+    \begin{itemize}
+        \item $F$ : Força aplicada pelo amortecedor MR em [$N$].
+        \item $\nu$ : Tensão elétrica aplicada na bobina em [$V$].
+        \item $z$ : Variável de estado responsável pela histerese.
+        \item $a_{0}$ : Coeficiente do modelo em [${V}/{N}$].
+        \item $\sigma_{0}$ : Coeficiente do modelo em [${N}/{m.V}$].
+        \item $\sigma_{1}$ : Coeficiente do modelo em [${N.s}/{m}$].
+        \item $\sigma_{2}$ : Coeficiente do modelo em [${N.s}/{m}$].
+        \item $\sigma_{a}$ : Coeficiente do modelo em [${N}/{m}$].
+        \item $\sigma_{b}$ : Coeficiente do modelo em [${N.s}/{m.V}$].
+    \end{itemize}
+    
+    \subsection{Modelo completo de um sistema de suspensão semi-ativa, não linear, de um quarto de veículo, com dois graus de liberdade, empregando amortecedor MR}
+    
+    Pela aplicação das equações \ref{eq:forca_amortecedor_MR} no sistema descrito em \ref{eq:massa_mola_nao_linear} obtemos as seguintes equações diferenciais dinâmicas de segunda ordem que representam a dinâmica de um sistema de suspensão ativa não linear com atuador dinâmico Magneto-Reológico: 
+    
+            \begin{equation} \label{eq:massa_mola_nao_linear}
+        \begin{aligned}
+          m_{s}\ddot{x}_{c}=\ \ &k^{l}_{s}(x_{w}-x_{c})+k^{nl}_{s}(x_{w}-x_{c})^{3}+b^{l}_{s}(\dot{x}_{w}-\dot{x}_{c})\\
+                            -&b^{y}_{s}\mid\dot{x}_{w}-\dot{x}_{c}\mid+b^{nl}_{s}\sqrt{\mid\dot{x}_{w}-\dot{x}_{c}\mid}sgn(\dot{x}_{w}-\dot{x}_{c})\\ 
+                            -&\sigma_{a}.z-\sigma_{0}.z.\nu+\sigma_{1}.\dot{z}+\sigma_{2}.(\dot{x}_{w}-\dot{x}_{c})+\sigma_{b}.(\dot{x}_{w}-\dot{x}_{c}).\nu\\
+          m_{u}\ddot{x}_{w}=-&k^{l}_{s}(x_{w}-x_{c})-k^{nl}_{s}(x_{w}-x_{c})^{3}-k_{t}(x_{w}-x_{r})\\ 
+                            -&b^{l}_{s}(\dot{x}_{w}-\dot{x}_{c})+b^{y}_{s}\mid\dot{x}_{w}-\dot{x}_{c}\mid\\
+                            -&b^{nl}_{s}\sqrt{\mid\dot{x}_{w}-\dot{x}_{c}\mid}sgn(\dot{x}_{w}-\dot{x}_{c})\\
+                            +&\sigma_{a}.z+\sigma_{0}.z.\nu-\sigma_{1}.\dot{z}-\sigma_{2}.(\dot{x}_{w}-\dot{x}_{c})-\sigma_{b}.(\dot{x}_{w}-\dot{x}_{c}).\nu\\
+                     \dot{z}=\ \ &(\dot{x}_{w}-\dot{x}_{c})-\sigma_{0}.a_{0}.|\dot{x}_{w}-\dot{x}_{c}|.z\\ 
+        \end{aligned}
+    \end{equation}
+    
+    
     \section{Metodologia}
     \section{Resultados}
     \section{Conclusão}
