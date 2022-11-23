@@ -287,18 +287,72 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
     
     É esperado que o  sistema linearizado se aproxime do sistema não linear enquanto opere na vizinhança do ponto de equilíbrio utilizado para linearização. Que para este caso é a origem do sistema formado pelas variáveis de estado.
     \subsection{Simulação da resposta temporal do modelo linearizado}
-    Abaixo seguem figuras que ilustram a simulação temporal do sistema não linear e linearizado para 3 diferentes condições iniciais: $[x_c,\dot{x}_c,x_w, \dot{x}_w]=$ $[-0.01,-0.01,0,0]$,$[-0.1,-0.1,0,0]$ e $[-0.5,-0.5,0,0]$
+    Abaixo seguem figuras que ilustram a simulação temporal do sistema não linear e linearizado para 3 diferentes condições iniciais a parâmetros do sistema dados a seguir: 
     
+    \begin{equation*} 
+    \begin{split}
+        \begin{bmatrix}
+            x_c & \dot{x}_c & x_w & \dot{x}_w & \\
+        \end{bmatrix}=
+    \end{split}
+    \begin{split}
+        \begin{bmatrix}
+            -0.01& -0.01& 0& 0& \\
+             -0.1&  -0.1& 0& 0& \\
+             -0.5&  -0.5& 0& 0&\\
+        \end{bmatrix}
+    \end{split}
+    \end{equation*}
+    
+   \begin{equation} 
+        \begin{split} 
+        m_s =   & 290     [kg]\\
+        m_u =   & 40      [kg]\\
+        b^{l}_s =  & 700  [Ns.m^{-1}]\\
+        b^{nl}_s =  & 200      [Ns.m^{-1}]\\
+        b^{y}_s=  & 400      [Ns.m^{-1}]\\
+        k^{l}_s =  & 235.10^2 [N.m^{-1}]\\
+        k^{nl}_s = & 235.10^4 [N.m^{-1}]\\
+        k_t =  & 190.10^3 [N.m^{-1}]\\
+        \end{split}
+    \end{equation}
+
     \FloatBarrier
     \begin{figure}[htbp]
         \begin{centering}
             \includegraphics[width=7cm]{img/sim_temp_xc_n001_dxc_n001.png}
-            \includegraphics[width=5cm]{img/Otimizacao_Leg.png}
+            \includegraphics[width=5cm]{img/sim_temp_Leg.png}
             \caption{Simulação temporal do sistema para as condições iniciais:  $[x_c, \dot{x}_c, x_w, \dot{x}_w]=[-0.01,-0.01,0,0]$}
             \label{fig:sim_temp_xc_n01_dxc_n01}
         \end{centering}
     \end{figure}
     \FloatBarrier
+    
+    \FloatBarrier
+    \begin{figure}[htbp]
+        \begin{centering}
+            \includegraphics[width=7cm]{img/sim_temp_xc_n01_dxc_n01.png}
+            \includegraphics[width=5cm]{img/sim_temp_Leg.png}
+            \caption{Simulação temporal do sistema para as condições iniciais:  $[x_c, \dot{x}_c, x_w, \dot{x}_w]=[-0.1,-0.1,0,0]$}
+            \label{fig:sim_temp_xc_n01_dxc_n01}
+        \end{centering}
+    \end{figure}
+    \FloatBarrier
+    
+    \FloatBarrier
+    \begin{figure}[htbp]
+        \begin{centering}
+            \includegraphics[width=7cm]{img/sim_temp_xc_n05_dxc_n05.png}
+            \includegraphics[width=5cm]{img/sim_temp_Leg.png}
+            \caption{Simulação temporal do sistema para as condições iniciais:  $[x_c, \dot{x}_c, x_w, \dot{x}_w]=[-0.5,-0.5,0,0]$}
+            \label{fig:sim_temp_xc_n01_dxc_n01}
+        \end{centering}
+    \end{figure}
+    \FloatBarrier
+    
+    Pode-se observar a diferença dramática entre as simulações temporais dos sistemas para a condição inicial $[x_c, \dot{x}_c, x_w, \dot{x}_w]=[-0.5,-0.5,0,0]$ devido a esta ser a que mais se afasta do ponto de equilíbrio utilizado para linearização do sistema
+    
+    \subsection{Análise da estabilidade do sistema em malha aberta}
     
     \section{Metodologia}
     \section{Resultados}
