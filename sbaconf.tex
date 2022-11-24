@@ -401,7 +401,7 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
     \begin{figure}[htbp]
         \begin{centering}
             \includegraphics[width=7cm]{img/autovalores_malha_aberta.png}
-            \includegraphics[width=3cm]{img/autovalores_malha_fechada_leg.png}
+            \includegraphics[width=3cm]{img/auto   .png}
             \caption{Autovalores do sistema linearizado em malha aberta}
             \label{fig:autovalores_malha_aberta}
         \end{centering}
@@ -518,6 +518,42 @@ Equação para o cálculo do produto $\xi\omega_n$ para um tempo de assentamento
 \begin{equation*}
     \xi\omega_n \geq -\frac{ln\left( 0.02*\sqrt{1-0.6901} \right)}{1}=4.4978
 \end{equation*}
+
+A alocação dos polos $\sigma = a \pm b.i\\$ é determinada a partir da seguinte equação:
+
+\begin{align} \label{eq:polos_de_xi}
+     b = \pm \sqrt{a^2-\xi^2}
+\end{align}
+
+Para os polos dominantes $a=-\xi\omega_n=-4.4978$, aplicando-se esse valor na equação \ref{eq:polos_de_xi} obtemos:
+
+\begin{align} \label{eq:polos_de_xi}
+     b = \pm \sqrt{4.4978^2-0.6901^2} = \pm 4.4445
+\end{align}
+
+Para os polos não dominantes escolheu-se utilizar o mesmo valor da pare real dos autovalores $a=9.0004$, aplicando-se esse valor na equação \ref{eq:polos_de_xi} obtemos:
+
+\begin{align} \label{eq:polos_de_xi}
+     b = \pm \sqrt{9.0004^2-0.6901^2} = \pm 8.9739
+\end{align}
+
+Desta maneira obtemos a seguinte disposição de polos para o sistema em malha fechada:
+
+\begin{equation} \label{eq:autovalores_malha_fechada}
+        \begin{split}
+             \mathbf{eig(A)}=\lambda=
+        \end{split}
+        \begin{bmatrix}
+            -9.0004& +8.9739i&\\
+            -9.0004& -8.9739i&\\
+            -4.4978& + 4.4445i&\\
+            -4.4978& - 4.4445i&\\
+        \end{bmatrix}
+    \end{equation}
+
+Uma comparação entre os polos de malha aberta e malha fechada é exibida na figura \ref{} exibida a seguir.
+
+
 
     \section{Resultados}
     \section{Conclusão}
