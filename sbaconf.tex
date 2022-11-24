@@ -18,7 +18,8 @@
 \usepackage{unicode}
 \usepackage{ae}
 \usepackage{placeins}
-
+\usepackage{multicol}
+\usepackage{cuted}
 \usepackage{amsmath} % for 'bmatrix' environment
 
 
@@ -194,6 +195,10 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
                     &+\frac{k_t}{m_u}w+\frac{1}{m_u}u\\
         \end{aligned}
     \end{equation}
+    
+    \section{Metodologia}
+    \subsection{Linearização do modelo em espaço de estados}
+        
     O sistema proposto possui um ponto de equilíbrio na origem do sistema:
     \begin{equation*}
         \begin{split}
@@ -304,7 +309,7 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
     \end{split}
     \end{equation*}
     
-   \begin{equation} 
+   \begin{equation} \label{eq:parametros}
         \begin{split} 
         m_s =   & 290     [kg]\\
         m_u =   & 40      [kg]\\
@@ -354,7 +359,127 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
     
     \subsection{Análise da estabilidade do sistema em malha aberta}
     
-    \section{Metodologia}
+    Para o sistema linearizado com parâmetros dados pela equação \ref{eq:parametros} obtemos os seguinte conjunto de autovalores para a Matriz $A$ do sistema:
+    
+    \begin{equation}
+    \begin{split}
+    \mathbf{A} =
+        \begin{bmatrix}
+               0&      1&        0&     0&\\ \\
+               -\frac{2350}{29}& -\frac{70}{9}&  \frac{2350}{29}& \frac{70}{29}&\\ \\
+               0&      0&        0&     1&\\ \\
+                \frac{1175}{2}&   \frac{35}{2}& -\frac{10675}{2}& -\frac{35}{2}&\\ 
+        \end{bmatrix}; \ \
+    \end{split}
+   \begin{split}
+   \mathbf{B} =
+        \begin{bmatrix}
+               0&      0&\\ \\
+               0& -\frac{1}{290}&\\ \\
+               0&      0&\\ \\
+            4750&   \frac{1}{40}&\\
+        \end{bmatrix}
+   \end{split}     
+    \end{equation}
+    
+    \begin{equation} \label{eq:autovalores}
+        \begin{split}
+             \mathbf{eig(A)}=\lambda=
+        \end{split}
+        \begin{bmatrix}
+            -9.0004& +72.3231i&\\
+            -9.0004& -72.3231i&\\
+            -0.9565& + 8.4588i&\\
+            -0.9565& - 8.4588i&\\
+        \end{bmatrix}
+    \end{equation}
+        
+    Pode-se observar em \ref {eq:autovalores} que o sistema possui, como autovalores, dois pares de polos complexos conjugados com parte real negativa. Logo, pode-se concluir que o sistema é estável internamente. Como estabilidade interna implica em BIBO estabilidade, pode-se dizer que o sistema também é BIBO estável.
+    
+    
+    
+    \subsection{Análise da Controlabilidade e da observabilidade do sistema linearizado}
+    
+    Primeiramente definiremos a matriz $\mathbf{C}$ para termos como saída todos os 4 estados do sistema como exibido em \ref{eq:matriz_c} exibida a seguir:
+    
+    \begin{equation} \label{eq:matriz_c}
+        \begin{split}
+             \mathbf{C}=
+        \end{split}
+        \begin{bmatrix}
+            1&0&0&0&\\
+            0&1&0&0&\\
+            0&0&1&0&\\
+            0&0&0&1&\\
+        \end{bmatrix}
+    \end{equation}
+    
+    As matrizes de controlabilidade e observabilidade são definidas em \ref{eq:matriz_controlabilidade} e \ref{eq:matriz_observabilidade} exibidas a seguir:
+    
+    \begin{equation} \label{eq:matriz_controlabilidade}
+        \begin{split}
+             \mathbf{M_C}=
+        \end{split}
+        \begin{bmatrix}
+            B& AB& A^2B& \cdots& A^{n-1}B&
+        \end{bmatrix}
+    \end{equation}
+    
+    \begin{equation} \label{eq:matriz_observabilidade}
+        \begin{split}
+             \mathbf{M_O}=
+        \end{split}
+        \begin{bmatrix}
+            C&\\
+            CA&\\
+            CA^2&\\
+            \vdots&\\
+            CA^{n-1}&
+        \end{bmatrix}
+    \end{equation}
+    
+    O sistema definido pelas m,atrizes $A$, $B$ e $C$ é controlável se a matriz de controlabilidade $M_C$ tiver posto igual a $n=4$. O sistema será igualmente observável se a matriz de observabilidade $M_O$ tiver posto igual a $n=4$. Para o sistema definido pelo conjunto de parâmetros exibidos em \ref{eq:parametros} obtemos as matrizes $M_C$ e $M_O$ exibidas a seguir:
+    
+\begin{strip}
+\small
+    \begin{align} \label{eq:MC}
+        \mathbf{M_C}=
+        \begin{bmatrix}
+           0&      0&         0&   -\frac{1}{290}&      \frac{332500}{29}&       \frac{231}{3364}&        \frac{131693750}{841}&        \frac{182985}{195112}&\\ \\
+           0& -\frac{1}{290}& \frac{332500}{29}& \frac{231}{3364}&  \frac{131693750}{841}&  \frac{182985}{195112}& -\frac{1591251484375}{24389}& -\frac{3974592125}{11316496}&\\ \\
+           0&      0&      4750&     \frac{1}{40}&         -83125&       -\frac{231}{464}&       -\frac{1374471875}{58}&       -\frac{3378785}{26912}&\\ \\
+        4750&   \frac{1}{40}&    -83125& -\frac{231}{464}& -\frac{1374471875}{58}& -\frac{3378785}{26912}&   \frac{2919505859375}{3364}&   \frac{7665741125}{1560896}&\\ \\
+    \end{bmatrix}
+    \end{align}
+\end{strip}
+   
+\begin{strip}
+\small
+    \begin{align} \label{eq:MO}
+             \mathbf{M_O}=
+        \begin{bmatrix}
+                1&               0&                 0&                0&\\
+                0&               1&                 0&                0&\\
+                0&               0&                 1&                0&\\
+                0&               0&                 0&                1&\\
+                0&               1&                 0&                0&\\ \\
+         -\frac{2350}{29}&          -\frac{70}{29}&           \frac{2350}{29}&            \frac{70}{29}&\\ \\
+                0&               0&                 0&                1&\\ \\
+           \frac{1175}{2}&            \frac{35}{2}&          -\frac{10675}{2}&            -\frac{35}{2}&\\ \\
+         -\frac{2350}{29}&          -\frac{70}{29}&           \frac{2350}{29}&            \frac{70}{29}&\\ \\
+      \frac{1357125}{841}&      -\frac{27725}{841}&     -\frac{10999625}{841}&        \frac{27725}{841}&\\ \\
+           \frac{1175}{2}&            \frac{35}{2}&          -\frac{10675}{2}&            -\frac{35}{2}&\\ \\
+     -\frac{1357125}{116}&       \frac{27725}{116}&      \frac{10999625}{116}&      -\frac{578725}{116}&\\ \\
+      \frac{1357125}{841}&      -\frac{27725}{841}&     -\frac{10999625}{841}&        \frac{27725}{841}&\\ \\
+ \frac{1075036875}{48778}& \frac{110735625}{48778}& -\frac{8713274375}{48778}& -\frac{670000625}{48778}&\\ \\
+     -\frac{1357125}{116}&       \frac{27725}{116}&      \frac{10999625}{116}&      -\frac{578725}{116}&\\ \\
+-\frac{19850361875}{6728}& -\frac{670000625}{6728}& \frac{179289099375}{6728}&  \frac{1229265625}{6728}&\\ \\
+         \end{bmatrix}
+    \end{align}
+\end{strip}
+ 
+Dado que a ordem do sistema linearizado é $\mathbf{n}=4$, e como o $Rank(M_C)=4$ e $Rank(M_O)=4$, pode-se afirmar que o sistema linearizado é controlavel e observável.
+
     \section{Resultados}
     \section{Conclusão}
     
