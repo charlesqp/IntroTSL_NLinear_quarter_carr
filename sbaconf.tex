@@ -395,13 +395,25 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
     \end{equation}
         
     Pode-se observar em \ref {eq:autovalores} que o sistema possui, como autovalores, dois pares de polos complexos conjugados com parte real negativa. Logo, pode-se concluir que o sistema é estável internamente. Como estabilidade interna implica em BIBO estabilidade, pode-se dizer que o sistema também é BIBO estável.
+    Na figura \ref{fig:autovalores_malha_aberta} abaixo podemos observar a localização dos autovalores em malha aberta do sistema linearizado no plano imaginário.
     
+    \FloatBarrier
+    \begin{figure}[htbp]
+        \begin{centering}
+            \includegraphics[width=7cm]{img/autovalores_malha_aberta.png}
+            \includegraphics[width=3cm]{img/autovalores_malha_fechada_leg.png}
+            \caption{Autovalores do sistema linearizado em malha aberta}
+            \label{fig:autovalores_malha_aberta}
+        \end{centering}
+    \end{figure}
+    \FloatBarrier
     
+    Através do gráfico da figura \ref{fig:autovalores_malha_aberta}, pode-se observar que o sistema possui um par de autovalores dominantes, com frequência de oscilação da resposta de $8.4588 rad.s^{-1}$ e taxa de amortecimento de $0.1124$. Além disso, o sistema possui um outro par de autovalores não dominantes com frequência de oscilação da resposta de $72.3231 rad.s^{-1}$ e taxa de decaimento de $0.1235$
     
     \subsection{Análise da Controlabilidade e da observabilidade do sistema linearizado}
     
     Primeiramente definiremos a matriz $\mathbf{C}$ para termos como saída todos os 4 estados do sistema como exibido em \ref{eq:matriz_c} exibida a seguir:
-    
+     \FloatBarrier
     \begin{equation} \label{eq:matriz_c}
         \begin{split}
              \mathbf{C}=
@@ -415,7 +427,6 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
     \end{equation}
     
     As matrizes de controlabilidade e observabilidade são definidas em \ref{eq:matriz_controlabilidade} e \ref{eq:matriz_observabilidade} exibidas a seguir:
-    
     \begin{equation} \label{eq:matriz_controlabilidade}
         \begin{split}
              \mathbf{M_C}=
@@ -424,7 +435,7 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
             B& AB& A^2B& \cdots& A^{n-1}B&
         \end{bmatrix}
     \end{equation}
-    
+
     \begin{equation} \label{eq:matriz_observabilidade}
         \begin{split}
              \mathbf{M_O}=
@@ -437,27 +448,22 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
             CA^{n-1}&
         \end{bmatrix}
     \end{equation}
-    
+
     O sistema definido pelas m,atrizes $A$, $B$ e $C$ é controlável se a matriz de controlabilidade $M_C$ tiver posto igual a $n=4$. O sistema será igualmente observável se a matriz de observabilidade $M_O$ tiver posto igual a $n=4$. Para o sistema definido pelo conjunto de parâmetros exibidos em \ref{eq:parametros} obtemos as matrizes $M_C$ e $M_O$ exibidas a seguir:
-    
-\begin{strip}
-\small
+    \FloatBarrier
+    $\mathbf{M_C}=$\\
     \begin{align} \label{eq:MC}
-        \mathbf{M_C}=
-        \begin{bmatrix}
-           0&      0&         0&   -\frac{1}{290}&      \frac{332500}{29}&       \frac{231}{3364}&        \frac{131693750}{841}&        \frac{182985}{195112}&\\ \\
-           0& -\frac{1}{290}& \frac{332500}{29}& \frac{231}{3364}&  \frac{131693750}{841}&  \frac{182985}{195112}& -\frac{1591251484375}{24389}& -\frac{3974592125}{11316496}&\\ \\
-           0&      0&      4750&     \frac{1}{40}&         -83125&       -\frac{231}{464}&       -\frac{1374471875}{58}&       -\frac{3378785}{26912}&\\ \\
-        4750&   \frac{1}{40}&    -83125& -\frac{231}{464}& -\frac{1374471875}{58}& -\frac{3378785}{26912}&   \frac{2919505859375}{3364}&   \frac{7665741125}{1560896}&\\ \\
-    \end{bmatrix}
+        \begin{smallmatrix}
+           0&      0&         0&   -\frac{1}{290}&      \frac{332500}{29}&       \frac{231}{3364}&        \frac{131693750}{841}&        \frac{182985}{195112}&\\ 
+           0& -\frac{1}{290}& \frac{332500}{29}& \frac{231}{3364}&  \frac{131693750}{841}&  \frac{182985}{195112}& -\frac{1591251484375}{24389}& -\frac{3974592125}{11316496}&\\ 
+           0&      0&      4750&     \frac{1}{40}&         -83125&       -\frac{231}{464}&       -\frac{1374471875}{58}&       -\frac{3378785}{26912}&\\ 
+        4750&   \frac{1}{40}&    -83125& -\frac{231}{464}& -\frac{1374471875}{58}& -\frac{3378785}{26912}&   \frac{2919505859375}{3364}&   \frac{7665741125}{1560896}&\\ 
+    \end{smallmatrix}
     \end{align}
-\end{strip}
-   
-\begin{strip}
-\small
+ 
+   $\mathbf{M_O}=$
     \begin{align} \label{eq:MO}
-             \mathbf{M_O}=
-        \begin{bmatrix}
+        \begin{smallmatrix}
                 1&               0&                 0&                0&\\
                 0&               1&                 0&                0&\\
                 0&               0&                 1&                0&\\
@@ -474,11 +480,44 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
  \frac{1075036875}{48778}& \frac{110735625}{48778}& -\frac{8713274375}{48778}& -\frac{670000625}{48778}&\\ \\
      -\frac{1357125}{116}&       \frac{27725}{116}&      \frac{10999625}{116}&      -\frac{578725}{116}&\\ \\
 -\frac{19850361875}{6728}& -\frac{670000625}{6728}& \frac{179289099375}{6728}&  \frac{1229265625}{6728}&\\ \\
-         \end{bmatrix}
+         \end{smallmatrix}
     \end{align}
-\end{strip}
- 
-Dado que a ordem do sistema linearizado é $\mathbf{n}=4$, e como o $Rank(M_C)=4$ e $Rank(M_O)=4$, pode-se afirmar que o sistema linearizado é controlavel e observável.
+
+Dado que a ordem do sistema linearizado é $\mathbf{n}=4$, e como o $Rank(M_C)=4$ e $Rank(M_O)=4$, pode-se afirmar que o sistema linearizado é controlável e observável.
+
+\subsection{Projeto de um controlador por realimentação de estados}
+
+Requisitos temporais para projeto do controlador por realimentação de estados:
+
+\begin{center}
+    \begin{tabular}{||c|c|c||}
+        \hline
+        $M_O$ & Máximo overshoot & 5 \% \\
+        \hline
+        $T_S$ & Tempo de acomodação 2 \% & 1 s \\
+        \hline
+    \end{tabular}
+    %\caption{Caption}
+    \label{tab:my_label}
+\end{center}
+
+Equação para o cálculo da Taxa de amortecimento para um valor de máximo overshoot dado:
+\begin{equation}
+    \xi=-\frac{ln\left( M_O \right)}{\sqrt{\pi^2+ln^2(M_O) }}
+\end{equation}
+
+\begin{equation*}
+    \xi=-\frac{ln\left( 0.05 \right)}{\sqrt{\pi^2+ln^2(0.05)}}=0.6901
+\end{equation*}
+
+Equação para o cálculo do produto $\xi\omega_n$ para um tempo de assentamento dado:
+\begin{equation}
+    \xi\omega_n \geq -\frac{ln\left( 0.02*\sqrt{1-\xi} \right)}{T_{S_{2\%}}}
+\end{equation}
+
+\begin{equation*}
+    \xi\omega_n \geq -\frac{ln\left( 0.02*\sqrt{1-0.6901} \right)}{1}=4.4978
+\end{equation*}
 
     \section{Resultados}
     \section{Conclusão}
