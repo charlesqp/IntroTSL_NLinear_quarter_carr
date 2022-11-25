@@ -195,6 +195,49 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
                     &+\frac{k_t}{m_u}w+\frac{1}{m_u}u\\
         \end{aligned}
     \end{equation}
+    \subsection{Especificações da Resposta Transitória para Sistemas Subamortecidos}
+    As características de um sistema de controle são geralmente especificadas em termos da resposta transitória para uma entrada em degrau. Para sistemas LIT, quando a resposta ao degrau é conhecida, pode-se calcular a resposta a qualquer tipo de entrada e Costuma-se utilizar condição inicial de sistema em repouso. As seguintes especificações são as mais utilizadas:
+    \begin{itemize}
+        \item  Tempo de atraso - $t_d$: tempo necessário para que a resposta alcance metade do seu valor final pela primeira vez.
+        \item  Tempo de subida - $t_r$: tempo requerido para que a resposta passe de 10\% a 90\%, ou de 5\% a 95\%, ou de 0\% a 100\% do valor final. Para sistemas de 2ª ordem subamortecido, utiliza-se 0\% a 100\% do valor final. Para sistemas superamortecidos, geralmente considera-se de 10\% a 90\%.
+        \begin{equation} \label{eq:tr}
+            t_r = \frac{\pi-\theta}{\omega_d}
+        \end{equation} 
+        \item Tempo de pico - $t_p$: tempo para que a resposta atinja o primeiro pico de sobressinal.
+        \begin{equation} \label{eq:tp}
+            t_p = \frac{\pi}{\omega_d}
+        \end{equation}
+        \item Máximo Overshoot $MO$: valor máximo de pico da curva de resposta, medido a partir da unidade. Se o valor da resposta em regime diferir da unidade, utiliza-se a porcentagem máxima de sobressinal (ou ultrapassagem percentual, U.P.):
+        \begin{equation} \label{eq:MO}
+        \begin{split}
+            M_O=\exp{(\frac{-\xi.\pi}{\sqrt(1-\xi^2)})}\\
+            \xi=-\frac{ln\left( M_O \right)}{\sqrt{\pi^2+ln^2(M_O)}}    
+        \end{split}
+        \end{equation}
+        \item Tempo de acomodação ou assentamento - $t_s$: tempo necessário para que a resposta permaneça com valores no interior de uma certa faixa (usualmente $\pm2\%$ ou $\pm5\%$) em torno do valor final.
+        \begin{equation} \label{eq:Ts2}
+        \begin{split}
+            T_{S_{2\%}}=-\frac{ln\left( 0.02*\sqrt{1-\xi} \right)}{\omega_n*\xi}\\
+            \omega_n=-\frac{ln\left( 0.02*\sqrt{1-\xi} \right)}{T_{S_{2\%}}*\xi}  
+        \end{split}
+        \end{equation}
+    \end{itemize}
+
+    Dado que:
+    \begin{equation} \label{eq:eign}
+            \lambda = \sigma \pm \omega_d.i
+    \end{equation}
+    \begin{equation} \label{eq:xi}
+        \xi=\frac{\sigma}{|\omega_n|}
+    \end{equation}
+    \begin{equation} \label{eq:theta}
+            \xi=\cos{(\theta)}
+    \end{equation}
+    \begin{equation} \label{eq:wd}
+            \omega_d=\omega_n\sqrt{1-\xi^2}
+    \end{equation}
+    
+    \subsection{Alocação de polos pela fórmula de Lyapunov}
     
     \section{Metodologia}
     \subsection{Linearização do modelo em espaço de estados}
@@ -384,7 +427,7 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
     
     \begin{equation} \label{eq:autovalores}
         \begin{split}
-             \mathbf{eig(A)}=\lambda=
+             lambda=\mathbf{eig(A)}=\
         \end{split}
         \begin{bmatrix}
             -9.0004& +72.3231i&\\
@@ -401,7 +444,7 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
     \begin{figure}[htbp]
         \begin{centering}
             \includegraphics[width=7cm]{img/autovalores_malha_aberta.png}
-            \includegraphics[width=3cm]{img/auto   .png}
+            \includegraphics[width=3cm]{img/autovalores_malha_aberta_leg.png}
             \caption{Autovalores do sistema linearizado em malha aberta}
             \label{fig:autovalores_malha_aberta}
         \end{centering}
@@ -412,7 +455,7 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
     
     \subsection{Análise da Controlabilidade e da observabilidade do sistema linearizado}
     
-    Primeiramente definiremos a matriz $\mathbf{C}$ para termos como saída todos os 4 estados do sistema como exibido em \ref{eq:matriz_c} exibida a seguir:
+    Primeiramente definiremos a matriz $\mathbf{C}$ para termos como saída apenas os estados do sistema referentes a posição das massas suspensa e não suspensa, como demonstrado em \ref{eq:matriz_c} exibida a seguir:
      \FloatBarrier
     \begin{equation} \label{eq:matriz_c}
         \begin{split}
@@ -420,9 +463,7 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
         \end{split}
         \begin{bmatrix}
             1&0&0&0&\\
-            0&1&0&0&\\
             0&0&1&0&\\
-            0&0&0&1&\\
         \end{bmatrix}
     \end{equation}
     
@@ -451,109 +492,108 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
 
     O sistema definido pelas m,atrizes $A$, $B$ e $C$ é controlável se a matriz de controlabilidade $M_C$ tiver posto igual a $n=4$. O sistema será igualmente observável se a matriz de observabilidade $M_O$ tiver posto igual a $n=4$. Para o sistema definido pelo conjunto de parâmetros exibidos em \ref{eq:parametros} obtemos as matrizes $M_C$ e $M_O$ exibidas a seguir:
     \FloatBarrier
-    $\mathbf{M_C}=$\\
-    \begin{align} \label{eq:MC}
-        \begin{smallmatrix}
-           0&      0&         0&   -\frac{1}{290}&      \frac{332500}{29}&       \frac{231}{3364}&        \frac{131693750}{841}&        \frac{182985}{195112}&\\ 
-           0& -\frac{1}{290}& \frac{332500}{29}& \frac{231}{3364}&  \frac{131693750}{841}&  \frac{182985}{195112}& -\frac{1591251484375}{24389}& -\frac{3974592125}{11316496}&\\ 
-           0&      0&      4750&     \frac{1}{40}&         -83125&       -\frac{231}{464}&       -\frac{1374471875}{58}&       -\frac{3378785}{26912}&\\ 
-        4750&   \frac{1}{40}&    -83125& -\frac{231}{464}& -\frac{1374471875}{58}& -\frac{3378785}{26912}&   \frac{2919505859375}{3364}&   \frac{7665741125}{1560896}&\\ 
+    \begin{equation} \label{eq:MC}
+          \begin{split}
+             \mathbf{M_C}=
+        \end{split}
+    \begin{smallmatrix}
+                   0& -\frac{1}{290}&     \frac{231}{3364}&  \frac{679}{724}&\\  
+      -\frac{1}{290}&  \frac{231}{3364}&  \frac{679}{724}&   -\frac{33366}{95}&\\
+                   0&  \frac{1}{40}&     -\frac{231}{464}&  -\frac{11425}{91}&\\  
+        \frac{1}{40}& -\frac{231}{464}&  -\frac{11425}{91}&  \frac{44200}{9}&\\
     \end{smallmatrix}
-    \end{align}
+    \end{equation}
  
-   $\mathbf{M_O}=$
-    \begin{align} \label{eq:MO}
+    \begin{equation} \label{eq:MO}
+        \begin{split}
+             \mathbf{M_O}=
+        \end{split}
         \begin{smallmatrix}
-                1&               0&                 0&                0&\\
-                0&               1&                 0&                0&\\
-                0&               0&                 1&                0&\\
-                0&               0&                 0&                1&\\
-                0&               1&                 0&                0&\\ \\
-         -\frac{2350}{29}&          -\frac{70}{29}&           \frac{2350}{29}&            \frac{70}{29}&\\ \\
-                0&               0&                 0&                1&\\ \\
-           \frac{1175}{2}&            \frac{35}{2}&          -\frac{10675}{2}&            -\frac{35}{2}&\\ \\
-         -\frac{2350}{29}&          -\frac{70}{29}&           \frac{2350}{29}&            \frac{70}{29}&\\ \\
-      \frac{1357125}{841}&      -\frac{27725}{841}&     -\frac{10999625}{841}&        \frac{27725}{841}&\\ \\
-           \frac{1175}{2}&            \frac{35}{2}&          -\frac{10675}{2}&            -\frac{35}{2}&\\ \\
-     -\frac{1357125}{116}&       \frac{27725}{116}&      \frac{10999625}{116}&      -\frac{578725}{116}&\\ \\
-      \frac{1357125}{841}&      -\frac{27725}{841}&     -\frac{10999625}{841}&        \frac{27725}{841}&\\ \\
- \frac{1075036875}{48778}& \frac{110735625}{48778}& -\frac{8713274375}{48778}& -\frac{670000625}{48778}&\\ \\
-     -\frac{1357125}{116}&       \frac{27725}{116}&      \frac{10999625}{116}&      -\frac{578725}{116}&\\ \\
--\frac{19850361875}{6728}& -\frac{670000625}{6728}& \frac{179289099375}{6728}&  \frac{1229265625}{6728}&\\ \\
-         \end{smallmatrix}
-    \end{align}
+           1&              0&              0&              0&\\
+           0&              0&              1&              0&\\       
+           0&              1&              0&              0&\\       
+           0&              0&              0&              1&\\    
+       -\frac{2350}{29}&   -\frac{70}{29}&      \frac{2350}{29}&   \frac{ 70}{29}&\\    
+        \frac{1175}{2}&     \frac{35}{2}&      -\frac{10675}{2}&  -\frac{35}{2}&\\    
+        \frac{43570}{27}&  -\frac{27725}{841}& -\frac{117713}{9}&  \frac{27725}{841}&\\
+       -\frac{198889}{17}&  \frac{27725}{116}&  \frac{284473}{3}& -\frac{578725}{116}&\\
+        \end{smallmatrix}
+    \end{equation}
 
 Dado que a ordem do sistema linearizado é $\mathbf{n}=4$, e como o $Rank(M_C)=4$ e $Rank(M_O)=4$, pode-se afirmar que o sistema linearizado é controlável e observável.
 
 \subsection{Projeto de um controlador por realimentação de estados}
 
-Requisitos temporais para projeto do controlador por realimentação de estados:
+Escolheu-se definir os requisitos temporais para projeto do controlador por realimentação de estados separadamente para cada par de polos do sistema. Para o par de polos de resposta rápida, correspondentes à dinâmica da massa suspensa no eixo das rodas, deseja-se um valor de Máximo Overshoot $M_O \leq 10$ \% e Tempo de acomodação para a faixa de tolerância de 2 \% $T_S \leq 0.1$ s. Os resultados numéricos são apresentados com arredondamento na quarta casa decimal.
 
-\begin{center}
-    \begin{tabular}{||c|c|c||}
-        \hline
-        $M_O$ & Máximo overshoot & 5 \% \\
-        \hline
-        $T_S$ & Tempo de acomodação 2 \% & 1 s \\
-        \hline
-    \end{tabular}
-    %\caption{Caption}
-    \label{tab:my_label}
-\end{center}
-
-Equação para o cálculo da Taxa de amortecimento para um valor de máximo overshoot dado:
-\begin{equation}
-    \xi=-\frac{ln\left( M_O \right)}{\sqrt{\pi^2+ln^2(M_O) }}
-\end{equation}
+Dada a equação \ref{eq:MO} para o cálculo da Taxa de amortecimento para um valor de máximo overshoot dado, obtém-se o seguinte valor objetivo para $\xi$:
 
 \begin{equation*}
-    \xi=-\frac{ln\left( 0.05 \right)}{\sqrt{\pi^2+ln^2(0.05)}}=0.6901
+    \xi=-\frac{ln\left(0.1\right)}{\sqrt{\pi^2+ln^2(0.1)}}=0.5912
 \end{equation*}
 
-Equação para o cálculo do produto $\xi\omega_n$ para um tempo de assentamento dado:
-\begin{equation}
-    \xi\omega_n \geq -\frac{ln\left( 0.02*\sqrt{1-\xi} \right)}{T_{S_{2\%}}}
-\end{equation}
+Dada a equação \ref{eq:Ts2} para o cálculo da $\omega_n$ objetivo para um tempo de assentamento dado, obtém-se o seguinte valor objetivo para $\omega_n$:
 
 \begin{equation*}
-    \xi\omega_n \geq -\frac{ln\left( 0.02*\sqrt{1-0.6901} \right)}{1}=4.4978
+    \omega_n=-\frac{ln\left( 0.02*\sqrt{1-0.5912} \right)}{0.1*0.5912}=73.7409
 \end{equation*}
 
-A alocação dos polos $\sigma = a \pm b.i\\$ é determinada a partir da seguinte equação:
+A alocação dos polos $\lambda = \sigma \pm \omega_n.i$ é determinada a partir da aplicação dos valores encontrados nas equações \ref{eq:xi} e \ref{eq:wd} e \ref{eq:eign}
 
 \begin{align} \label{eq:polos_de_xi}
-     b = \pm \sqrt{a^2-\xi^2}
+     \lambda = \omega_n * (-\xi \pm \sqrt{1-\xi^2}.i)
 \end{align}
 
-Para os polos dominantes $a=-\xi\omega_n=-4.4978$, aplicando-se esse valor na equação \ref{eq:polos_de_xi} obtemos:
+Para os polos de resposta rápida obtemos:
 
-\begin{align} \label{eq:polos_de_xi}
-     b = \pm \sqrt{4.4978^2-0.6901^2} = \pm 4.4445
-\end{align}
+\begin{align*} \label{eq:polos_nao_dominantes}
+     \lambda_1 = -43.5923 + 47.1507*i\\
+     \lambda_2 = -43.5923 - 47.1507*i\\
+\end{align*}
 
-Para os polos não dominantes escolheu-se utilizar o mesmo valor da pare real dos autovalores $a=9.0004$, aplicando-se esse valor na equação \ref{eq:polos_de_xi} obtemos:
+Para os polos de resposta lenta, correspondentes a massa não suspensa do quarto de veiculo, deseja-se um valor de Máximo Overshoot $M_O \leq 10$ \% e Tempo de acomodação para a faixa de tolerância de 2 \% $T_S \leq 0.5$ s. Os resultados numéricos são apresentados com arredondamento na quarta casa decimal.
 
-\begin{align} \label{eq:polos_de_xi}
-     b = \pm \sqrt{9.0004^2-0.6901^2} = \pm 8.9739
-\end{align}
+Calcula-se os coeficientes $\xi$ e $\omega_n$ da mesma forma que para os polos não dominantes assim obtendo os autovalores correspondentes:
+
+\begin{equation*}
+    \xi=-\frac{ln\left(0.1\right)}{\sqrt{\pi^2+ln^2(0.1)}}=0.5912
+\end{equation*}
+
+\begin{equation*}
+    \omega_n=-\frac{ln\left( 0.02*\sqrt{1-0.5912} \right)}{0.5*0.5912}=14.7482
+\end{equation*}
+
+\begin{align*} \label{eq:polos_dominantes}
+     \lambda_3 = -8.7185 + 9.4301*i\\
+     \lambda_4 = -8.7185 - 9.4301*i\\
+\end{align*}
 
 Desta maneira obtemos a seguinte disposição de polos para o sistema em malha fechada:
 
 \begin{equation} \label{eq:autovalores_malha_fechada}
         \begin{split}
-             \mathbf{eig(A)}=\lambda=
+             \lambda=\mathbf{eig(A-B_u*K)}=
         \end{split}
         \begin{bmatrix}
-            -9.0004& +8.9739i&\\
-            -9.0004& -8.9739i&\\
-            -4.4978& + 4.4445i&\\
-            -4.4978& - 4.4445i&\\
+            -43.5923& + 47.1507i&\\
+            -43.5923& - 47.1507i&\\
+            -8.7185& + 9.4301i&\\
+            -8.7185& - 9.4301i&\\
         \end{bmatrix}
     \end{equation}
 
-Uma comparação entre os polos de malha aberta e malha fechada é exibida na figura \ref{} exibida a seguir.
+Uma comparação entre os polos de malha aberta e malha fechada é exibida na figura \ref{fig:autovalores_malha_fechada} exibida a seguir.
 
-
+    \FloatBarrier
+    \begin{figure}[htbp]
+        \begin{centering}
+            \includegraphics[width=7cm]{img/autovalores_malha_fechada.png}
+            \includegraphics[width=7cm]{img/autovalores_malha_fechada_leg.png}
+            \caption{Comparação entre os Autovalores do sistema linearizado em malha aberta e malha fechada}
+            \label{fig:autovalores_malha_fechada}
+        \end{centering}
+    \end{figure}
+    \FloatBarrier
 
     \section{Resultados}
     \section{Conclusão}
