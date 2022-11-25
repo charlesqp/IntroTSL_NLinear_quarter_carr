@@ -195,6 +195,84 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
                     &+\frac{k_t}{m_u}w+\frac{1}{m_u}u\\
         \end{aligned}
     \end{equation}
+    
+    \subsection{Linearização do modelo em espaço de estados}
+    
+    Um sistema dinâmico descrito por meio de equações diferenciais não lineares pode ser linearizado na proximidade de um ponto de equilíbrio através do método da expansão em série de Taylor truncada no seu segundo termo como exibido na equação a seguir:
+    
+    \begin{equation}
+        P(x) = f(\alpha) + \dfrac{\mathrm{d}f(\alpha)}{\mathrm{d}x}*\frac{(x-\alpha)^{-1}}{1!}    
+    \end{equation}
+    
+    Onde $\alpha$ é um ponto de equilíbrio da equação $P(x)$.  
+    Para um sistema com múltiplas variáveis de estado, calcula-se a Jacobiana do sistema para realizar a linearização em torno do ponto de operação escolhido.  
+    
+    \begin{equation} \label{eq:Jacobian_A}
+    \mathbf{J_A}(x_1,x_2,\dots,x_n) =
+        \begin{bmatrix}
+            \frac{\partial x_1}{\partial x_1} & 
+            \frac{\partial x_1}{\partial x_2} & 
+            \dots &
+            \frac{\partial x_1}{\partial x_n} &\\[1ex]
+            \frac{\partial x_2}{\partial x_1} & 
+            \frac{\partial x_2}{\partial x_2} & 
+            \dots &
+            \frac{\partial x_2}{\partial x_n} &\\[1ex]
+            \vdots & 
+            \vdots & 
+            \ddots &
+            \vdots &\\[1ex]
+            \frac{\partial x_n}{\partial x_1} & 
+            \frac{\partial x_n}{\partial x_2} & 
+            \dots &
+            \frac{\partial x_n}{\partial x_n} &\\[1ex]
+    \end{bmatrix}
+    \end{equation}
+    
+    \begin{equation} \label{eq:eval_A}
+        \mathbf{A=J_A} \Bigr\rvert_{(x_1=\alpha_1;x_2=\alpha_2;\dots;x_n=\alpha_n)} \\
+    \end{equation}
+    
+    \begin{equation} \label{eq:Jacobian_B}
+    \mathbf{J_B}(u_1,u_2,\dots,u_m) =
+        \begin{bmatrix}
+            \frac{\partial u_1}{\partial u_1} & 
+            \frac{\partial u_1}{\partial u_2} & 
+            \dots &
+            \frac{\partial u_1}{\partial u_m} &\\[1ex]
+            \frac{\partial u_2}{\partial u_1} & 
+            \frac{\partial u_2}{\partial u_2} & 
+            \dots &
+            \frac{\partial u_2}{\partial u_m} &\\[1ex]
+            \vdots & 
+            \vdots & 
+            \ddots &
+            \vdots &\\[1ex]
+            \frac{\partial u_n}{\partial u_1} & 
+            \frac{\partial u_n}{\partial u_2} & 
+            \dots &
+            \frac{\partial u_m}{\partial u_m} &\\[1ex]
+    \end{bmatrix}
+    \end{equation}
+    
+    \begin{equation} \label{eq:eval_B}
+        \mathbf{B=J_B} \Bigr\rvert_{(u_1=\beta_1;u_2=\beta_2;\dots;u_m=\beta_m)} \\
+    \end{equation}
+    
+    \begin{equation} \label{eq:sis_lenearizado}
+        Y(x,u) = A*x + B*u
+    \end{equation}
+    
+     Onde:
+     \begin{itemize}
+        \item $x=[x_1,x_2,\dots,x_n]$ o vetor de estados do sistema
+        \item $u=[u_1,u_2,\dots,u_m]$ o vetor das entradas do sistema
+        \item $\alpha=[\alpha_1,\alpha_2,\dots,\alpha_n]$ um vetor solução para os pontos de equilíbrio dos estados do sistema.
+        \item $\beta=[\beta_1,\beta_2,\dots,\beta_m]$ um vetor solução para os pontos de equilíbrio das entradas do sistema.
+        \item $Y(x,u)$ equação do sistema linearizado ao redor do ponto de equilíbrio $\alpha$.
+     \end{itemize}
+     
+    
     \subsection{Especificações da Resposta Transitória para Sistemas Subamortecidos}
     As características de um sistema de controle são geralmente especificadas em termos da resposta transitória para uma entrada em degrau. Para sistemas LIT, quando a resposta ao degrau é conhecida, pode-se calcular a resposta a qualquer tipo de entrada e Costuma-se utilizar condição inicial de sistema em repouso. As seguintes especificações são as mais utilizadas:
     \begin{itemize}
@@ -237,7 +315,22 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
             \omega_d=\omega_n\sqrt{1-\xi^2}
     \end{equation}
     
-    \subsection{Alocação de polos pela fórmula de Lyapunov}
+    \subsection{Alocação de polos pela fórmula de Lyapunov} \label{sc:lyapunov}
+    
+    Considere o par $(A,b)$ controlável, com $A \in \mathbb{R}^{n*n}$ e $b \in \mathbb{R}^{n*1}$. Dada uma matriz $F \in \mathbb{R}^{n*n}$ arbitrária com os autovalores desejados para a resposta do sistema dinâmico em malha fechada, é possível encontrar um vetor de ganhos de realimentação $K\in \mathbb{R}^{1*n}$ tal que $eig(A-b*K)=eig(F)$ desde que $eig(A)\neq eig(F)$ através dos seguintes passos:
+    
+    \begin{enumerate}
+        \item Escolha uma matriz $F \in \mathbb{R}^{n*n}$ com os autovalores desejados.
+        \item Escolha um $\bar{k}$ arbitrário tal que $(F,\bar{k})$ seja observável.
+        \item {Obtenha a única solução $T$ da equação de Lyapunov
+        \begin{equation} \label{eq:lyapunov}
+            AT-TF=b\bar{k}
+        \end{equation}}
+        \item {Compute o ganho de realimentação:
+        \begin{equation} \label{eq:ganho}
+            K=\bar{k}T^{-1}
+        \end{equation}}
+    \end{enumerate}
     
     \section{Metodologia}
     \subsection{Linearização do modelo em espaço de estados}
@@ -251,55 +344,8 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
         x_4=\ \ &0\\
         \end{split}
     \end{equation*}
-    Calculamos a Jacobiana do Sistema para realizar a linearização em torno do ponto de operação escolhido:
-    
-    \begin{equation} \label{eq:Jacobian_A}
-    \mathbf{J_A}(x_1,x_2,x_3,x_4) =
-        \begin{bmatrix}
-            \frac{\partial x_1}{\partial x_1} & 
-            \frac{\partial x_1}{\partial x_2} & 
-            \frac{\partial x_1}{\partial x_3} &
-            \frac{\partial x_1}{\partial x_4} &\\[1ex] % <-- 1ex more space between rows of matrix
-            \frac{\partial x_2}{\partial x_1} & 
-            \frac{\partial x_2}{\partial x_2} & 
-            \frac{\partial x_2}{\partial x_3} &
-            \frac{\partial x_2}{\partial x_4} &\\[1ex]
-            \frac{\partial x_3}{\partial x_1} & 
-            \frac{\partial x_3}{\partial x_2} & 
-            \frac{\partial x_3}{\partial x_3} &
-            \frac{\partial x_3}{\partial x_4} &\\[1ex]
-            \frac{\partial x_4}{\partial x_1} & 
-            \frac{\partial x_4}{\partial x_2} & 
-            \frac{\partial x_4}{\partial x_3} &
-            \frac{\partial x_4}{\partial x_4} &\\[1ex]
-    \end{bmatrix}
-    \end{equation}
-    
-    \begin{equation} \label{eq:eval_A}
-        \mathbf{A=J_A} \Bigr\rvert_{(x_1=0;x_2=0;x_3=0;x_4=0)} \\
-    \end{equation}
-    
-    \begin{equation} \label{eq:Jacobian_B}
-    \mathbf{J_B}(w,F) =
-        \begin{bmatrix}
-            \frac{\partial x_1}{\partial w} & 
-            \frac{\partial x_1}{\partial F} &\\[1ex] % <-- 1ex more space between rows of matrix
-            \frac{\partial x_2}{\partial w} & 
-            \frac{\partial x_2}{\partial F} &\\[1ex]
-            \frac{\partial x_3}{\partial w} & 
-            \frac{\partial x_3}{\partial F} &\\[1ex]
-            \frac{\partial x_4}{\partial w} & 
-            \frac{\partial x_4}{\partial F} &\\[1ex]
-    \end{bmatrix}
-    \end{equation}
-    
-    \begin{equation} \label{eq:eval_B}
-        \mathbf{B=J_B} \Bigr\rvert_{(w;F)} \\
-    \end{equation}
-    
-    Aplicando o sistema de equações dinâmicas não lineares descrito em \ref{eq:massa_mola_nao_linear} nas equações \ref{eq:Jacobian_A}, \ref{eq:Jacobian_B}, \ref{eq:eval_A}, \ref{eq:eval_B} obteremos as matrizes A e B do sistema linearizado exibidas a seguir:
-    
-    
+    Para realizar a linearização em torno do ponto de operação escolhido calcula-se a Jacobiana do sistema de equações dinâmicas não lineares descrito em \ref{eq:massa_mola_nao_linear} através das equações \ref{eq:Jacobian_A} e \ref{eq:Jacobian_B}. Em seguida, calculou-se o valor da Jacobiana no valor especifico do ponto de equilibro, conforme as equações \ref{eq:eval_A} e \ref{eq:eval_B}, obtemos as matrizes $A$ e $B$ do sistema linearizado exibidas a seguir:
+ 
     \begin{equation*} 
     \begin{split}
         \mathbf{A} =
@@ -368,7 +414,7 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
     \FloatBarrier
     \begin{figure}[htbp]
         \begin{centering}
-            \includegraphics[width=7cm]{img/sim_temp_xc_n001_dxc_n001.png}
+            \includegraphics[width=6cm]{img/sim_temp_xc_n001_dxc_n001.png}
             \includegraphics[width=5cm]{img/sim_temp_Leg.png}
             \caption{Simulação temporal do sistema para as condições iniciais:  $[x_c, \dot{x}_c, x_w, \dot{x}_w]=[-0.01,-0.01,0,0]$}
             \label{fig:sim_temp_xc_n01_dxc_n01}
@@ -379,7 +425,7 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
     \FloatBarrier
     \begin{figure}[htbp]
         \begin{centering}
-            \includegraphics[width=7cm]{img/sim_temp_xc_n01_dxc_n01.png}
+            \includegraphics[width=6cm]{img/sim_temp_xc_n01_dxc_n01.png}
             \includegraphics[width=5cm]{img/sim_temp_Leg.png}
             \caption{Simulação temporal do sistema para as condições iniciais:  $[x_c, \dot{x}_c, x_w, \dot{x}_w]=[-0.1,-0.1,0,0]$}
             \label{fig:sim_temp_xc_n01_dxc_n01}
@@ -390,7 +436,7 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
     \FloatBarrier
     \begin{figure}[htbp]
         \begin{centering}
-            \includegraphics[width=7cm]{img/sim_temp_xc_n05_dxc_n05.png}
+            \includegraphics[width=6cm]{img/sim_temp_xc_n05_dxc_n05.png}
             \includegraphics[width=5cm]{img/sim_temp_Leg.png}
             \caption{Simulação temporal do sistema para as condições iniciais:  $[x_c, \dot{x}_c, x_w, \dot{x}_w]=[-0.5,-0.5,0,0]$}
             \label{fig:sim_temp_xc_n01_dxc_n01}
@@ -588,13 +634,61 @@ Uma comparação entre os polos de malha aberta e malha fechada é exibida na fi
     \begin{figure}[htbp]
         \begin{centering}
             \includegraphics[width=7cm]{img/autovalores_malha_fechada.png}
-            \includegraphics[width=7cm]{img/autovalores_malha_fechada_leg.png}
+            \includegraphics[width=6cm]{img/autovalores_malha_fechada_leg.png}
             \caption{Comparação entre os Autovalores do sistema linearizado em malha aberta e malha fechada}
             \label{fig:autovalores_malha_fechada}
         \end{centering}
     \end{figure}
     \FloatBarrier
-
+    
+    O ganho de realimentação para alocação de autovalores em malha fechada é computado através da equação de Lyapunov conforme descrito na seção \ref{sc:lyapunov} conforme exibido a seguir:
+    
+    \begin{equation*} 
+    \begin{split}
+        \mathbf{F} =
+        \begin{bmatrix}
+            -43.5923 &  47.1507 &       0       & 0 & \\ 
+            -47.1507 & -43.5923 &       0 &       0 & \\
+                   0 &        0 & -8.7185 &  9.4301 & \\
+                   0 &        0 & -9.4301 & -8.7185 & \\
+        \end{bmatrix}
+    \end{split}
+    \end{equation*} 
+ 
+    \begin{equation*} 
+    \begin{split}
+        \mathbf{B} = B_u = 
+        \begin{bmatrix}
+            0 & \\
+            -\frac{1}{m_s}&\\ \\
+            0 & \\
+            \frac{1}{m_u} \\
+        \end{bmatrix};\ \
+    \end{split}
+    \begin{split}
+    \mathbf{\bar{K}} =
+        \begin{bmatrix}
+        1&0&1&0&
+        \end{bmatrix}
+    \end{split}
+    \end{equation*} 
+    
+    Resolvendo a equação de Lyapunov \ref{eq:lyapunov} para $T$ e substituindo a matriz T encontrada na equação \ref{eq:ganho} obtém-se os seguintes valores de ganhos de realimentação, valores arredondados na quarta casa decimal:
+    
+    \begin{center}
+    \begin{tabular}{|c|c|}
+        \hline
+        Estado & Ganho\\
+        \hline
+        \hline
+        $x_1$    & -18023.2837\\
+        $x_2$    & -4567.6793\\
+        $x_3$    & 13118.63414\\   
+        $x_4$    & 2758.2869 \\
+        \hline
+    \end{tabular}
+    \end{center}
+			
     \section{Resultados}
     \section{Conclusão}
     
