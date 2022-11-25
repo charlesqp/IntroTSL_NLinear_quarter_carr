@@ -380,7 +380,7 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
     \end{equation}
     
     É esperado que o  sistema linearizado se aproxime do sistema não linear enquanto opere na vizinhança do ponto de equilíbrio utilizado para linearização. Que para este caso é a origem do sistema formado pelas variáveis de estado.
-    \subsection{Simulação da resposta temporal do modelo linearizado}
+    \subsection{Simulação da resposta temporal do modelo linearizado em malha aberta}
     Abaixo seguem figuras que ilustram a simulação temporal do sistema não linear e linearizado para 3 diferentes condições iniciais a parâmetros do sistema dados a seguir: 
     
     \begin{equation*} 
@@ -568,7 +568,7 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
 
 Dado que a ordem do sistema linearizado é $\mathbf{n}=4$, e como o $Rank(M_C)=4$ e $Rank(M_O)=4$, pode-se afirmar que o sistema linearizado é controlável e observável.
 
-\subsection{Projeto de um controlador por realimentação de estados}
+\subsection{Projeto de um controlador por realimentação de estados} \label{sc:projeto_controlador_full}
 
 Escolheu-se definir os requisitos temporais para projeto do controlador por realimentação de estados separadamente para cada par de polos do sistema. Para o par de polos de resposta rápida, correspondentes à dinâmica da massa suspensa no eixo das rodas, deseja-se um valor de Máximo Overshoot $M_O \leq 10$ \% e Tempo de acomodação para a faixa de tolerância de 2 \% $T_S \leq 0.1$ s. Os resultados numéricos são apresentados com arredondamento na quarta casa decimal.
 
@@ -688,7 +688,32 @@ Uma comparação entre os polos de malha aberta e malha fechada é exibida na fi
         \hline
     \end{tabular}
     \end{center}
-			
+    
+    \subsection{Simulação da resposta temporal do modelo linearizado em malha fechada com controlador por realimentação de estados}
+    
+    Abaixo seguem gráficos que ilustram a simulação temporal da resposta do sistema linearizado para excitação com entrada em "lombada" degrau de 0.1m:
+    \FloatBarrier
+    \begin{figure}[htbp]
+        \begin{centering}
+            \includegraphics[width=8cm]{img/simulaca_temporal_linear_realimentacao.png}
+            \includegraphics[width=6cm]{img/sim_linear_simulink_temp_leg.png}
+            \caption{Simulação da resposta temporal em malha fechada com o controlador projetado na subseção \ref{sc:projeto_controlador_full} para o sistema linearizado.Estados $x_c$ e $x_w$ }
+            \label{fig:autovalores_malha_fechada}
+        \end{centering}
+    \end{figure}
+    \FloatBarrier
+	
+	\FloatBarrier
+    \begin{figure}[htbp]
+        \begin{centering}
+            \includegraphics[width=8cm]{img/simulaca_temporal_linear_realimentacao.png}
+            \includegraphics[width=6cm]{img/sim_linear_simulink_temp_leg.png}
+            \caption{Simulação da resposta temporal em malha fechada com o controlador projetado na subseção \ref{sc:projeto_controlador_full} para o sistema linearizado.Estados $x_c$ e $x_w$ }
+            \label{fig:autovalores_malha_fechada}
+        \end{centering}
+    \end{figure}
+    \FloatBarrier
+    
     \section{Resultados}
     \section{Conclusão}
     
