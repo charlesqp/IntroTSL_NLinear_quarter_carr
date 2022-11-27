@@ -731,7 +731,7 @@ Uma comparação entre os polos de malha aberta e malha fechada é exibida na fi
     
     Abaixo seguem gráficos que ilustram a simulação temporal da resposta do sistema não linear comparada com a resposta do sistema linearizado para excitação com entrada em "lombada" degrau de 0.1m:
     
-     \FloatBarrier
+    \FloatBarrier
     \begin{figure}[htbp]
         \begin{centering}
             \includegraphics[width=7cm]{img/simulaca_temporal_nao_linear_realimentacao.png}
@@ -757,8 +757,29 @@ Uma comparação entre os polos de malha aberta e malha fechada é exibida na fi
     
     Para comparação, é exibido a seguir a mesma simulação temporal para uma entrada com "lombada" em degrau unitário. Esta entrada excita mais frequências de ambos os sistema e podem revelar mais informações sobre as diferenças entre ambos os sistemas: 
     
+    \FloatBarrier
+    \begin{figure}[htbp]
+        \begin{centering}
+            \includegraphics[width=7cm]{img/simulaca_temporal_nao_linear_realimentacao_unit.png}
+            \includegraphics[width=6cm]{img/sim_nao_linear_simulink_temp_leg.png}
+            \caption{Simulação da resposta temporal em malha fechada com o controlador projetado na subseção \ref{sc:projeto_controlador_full} para o sistema linearizado e não linearizado.Estados $x_c$ e $x_w$ }
+            \label{fig:simulaca_temporal_nao_linear_realimentacao_unit}
+        \end{centering}
+    \end{figure}
+    \FloatBarrier
+	
+	\FloatBarrier
+    \begin{figure}[htbp]
+        \begin{centering}
+            \includegraphics[width=7cm]{img/simulaca_temporal_nao_linear_realimentacao_unit_V.png}
+            \includegraphics[width=6cm]{img/sim_nao_linear_simulink_temp_leg.png}
+            \caption{Simulação da resposta temporal em malha fechada com o controlador projetado na subseção \ref{sc:projeto_controlador_full} para o sistema linearizado e não linearizado.Estados $V_c = \dot{x}_c$ e $V_w = \dot{x}_w$ }
+            \label{fig:simulaca_temporal_nao_linear_realimentacao_unit_V}
+        \end{centering}
+    \end{figure}
+    \FloatBarrier
     
-     
+    A observação dos gráficos da resposta temporal exibida nas figuras \ref{fig:simulaca_temporal_nao_linear_realimentacao_unit} e \ref{fig:simulaca_temporal_nao_linear_realimentacao_unit_V} demonstra que para uma entrada que desloque o sistema para uma região muito distante do ponto de equilíbrio utilizado para linearização pode causar uma grande diferença na resposta temporal do controle em malha fechada. Mas ainda assim, para este caso especifico, o sistema não linear em malha fechada apresentou melhor desempenho que o sistema linear.
     
     \section{Resultados}
     \section{Conclusão}
