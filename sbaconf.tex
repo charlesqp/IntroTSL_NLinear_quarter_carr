@@ -783,8 +783,28 @@ Uma comparação entre os polos de malha aberta e malha fechada é exibida na fi
 
  \subsection{Simulação da resposta temporal em malha fechada com o controlador projetado para o sistema linearizado e considerando perturbação}
  
-Abaixo seguem gráficos que ilustram a simulação temporal da resposta do sistema linearizado para excitação com perturbações em degraus aleatórios entre $\pm$ 5cm e com adição de ruído de medição.
+Abaixo seguem gráficos que ilustram a simulação temporal da resposta do sistema linearizado para excitação com perturbações em degraus aleatórios entre $\pm$ 5cm.
 
+\FloatBarrier
+    \begin{figure}[htbp]
+        \begin{centering}
+            \includegraphics[width=8cm]{img/simulaca_temporal_linear_perturbacao.png}
+            \includegraphics[width=7cm]{img/sim_linear_simulink_temp_leg.png}
+            \caption{Simulação da resposta temporal com o controlador projetado na subseção \ref{sc:projeto_controlador_full} para o sistema linearizado em malha aberta e malha fechada.Estados $X_c = \dot{x}_c$ e $X_w = \dot{x}_w$ }
+            \label{fig:simulaca_temporal_linear_perturbacao}
+        \end{centering}
+    \end{figure}
+    \FloatBarrier
+\FloatBarrier
+    \begin{figure}[htbp]
+        \begin{centering}
+            \includegraphics[width=8cm]{img/simulaca_temporal_linear_perturbacao_V.png}
+            \includegraphics[width=7cm]{img/sim_linear_simulink_temp_leg.png}
+            \caption{Simulação da resposta temporal com o controlador projetado na subseção \ref{sc:projeto_controlador_full} para o sistema linearizado em malha aberta e malha fechada.Estados $V_c = \ddot{x}_c$ e $V_w = \ddot{x}_w$ }
+            \label{fig:simulaca_temporal_linear_perturbacao}
+        \end{centering}
+    \end{figure}
+    \FloatBarrier
 
 
     \section{Resultados}
