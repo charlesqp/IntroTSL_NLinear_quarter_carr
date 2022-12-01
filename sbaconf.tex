@@ -689,7 +689,7 @@ Uma comparação entre os polos de malha aberta e malha fechada é exibida na fi
     \end{tabular}
     \end{center}
     
-    \subsection{Simulação da resposta temporal do modelo linearizado em malha fechada com controlador por realimentação de estados}
+    \subsection{Simulação da resposta temporal do modelo linearizado em malha fechada com controlador por realimentação de estados} \label{sc:analise_resposta}
     
     Abaixo seguem gráficos que ilustram a simulação temporal da resposta do sistema linearizado para excitação com entrada em "lombada" degrau de 0.1m:
     \FloatBarrier
@@ -805,7 +805,51 @@ Abaixo seguem gráficos que ilustram a simulação temporal da resposta do siste
         \end{centering}
     \end{figure}
     \FloatBarrier
+Para a análise da resposta dinâmica do sistema controlado permanecem válidas as mesmas considerações apresentadas na seção \ref{sc:analise_resposta}
 
+\subsection{Projeto de um controlador baseado no observador para o sistema linearizado considerando
+que apenas algumas variáveis de estado não são mensuráveis}
+
+Considerou-se para efeitos práticos que as variáveis de estado $x_w$ e $\dot{x}_w$, correspondentes a posição vertical do eixo da roda e sua respectiva velocidade, não são mensuráveis.
+
+Foi decidido que a dinâmica do estimador de estados deve ser 5 vezes  mais rápida do que a dinâmica do sistema linearizado, cujos autovalores são exibidos em \ref{eq:autovalores}.
+Os autovalores escolhidos para a dinâmica do preditor linear são exibidos a seguir:
+
+ \begin{equation} \label{eq:autovalores_pred}
+        \begin{split}
+             lambda=\mathbf{eig(Â)}=\
+        \end{split}
+        \begin{bmatrix}
+            -0.1913& + 1.6918i&\\
+            -0.1913& - 1.6918i&\\
+            -1.8001& +14.4646i&\\
+            -1.8001& -14.4646i&\\
+        \end{bmatrix}
+    \end{equation}
+
+Os autovalores foram utilizados para definir o conjunto de ganhos $L$ do observador de estados através da fórmula de Lyapunov definida em \ref{eq:lyapunov}. No entanto empregou-se a seguinte substituição de variáveis:
+ \begin{equation} \label{eq:var_pred}
+        \begin{split}
+        A = A^{t}&\\
+        B = C^{t}&
+        \end{split}
+ \end{equation}
+
+Desta maneira, foi encontrada a seguinte matriz de ganhos de realimentação para o observador de estados linear, números arredondados na quarta casa decimal:
+
+ \begin{equation} \label{eq:ganhos_pred}
+        \begin{split}
+            \mathbf{L}=\
+        \end{split}
+        \begin{bmatrix}
+            0.0059& 0.0059& 0.0059& 0.0059&\\
+            0.0005& 0.0005& 0.0005& 0.0005&\\
+            0.0001& 0.0001& 0.0001& 0.0001&\\
+            0.0000& 0.0000& 0.0000& 0.0000&\\
+        \end{bmatrix}
+    \end{equation}
+
+    Uma simulação temporal do sistema não linear controlado pelo ganho de realimentação de estados, obtido através do preditor desenvolvido nesta seção é exibido nas figuras abaixo:
 
     \section{Resultados}
     \section{Conclusão}
