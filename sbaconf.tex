@@ -812,18 +812,17 @@ que apenas algumas variáveis de estado não são mensuráveis}
 
 Considerou-se para efeitos práticos que as variáveis de estado $x_w$ e $\dot{x}_w$, correspondentes a posição vertical do eixo da roda e sua respectiva velocidade, não são mensuráveis.
 
-Foi decidido que a dinâmica do estimador de estados deve ser 5 vezes  mais rápida do que a dinâmica do sistema linearizado, cujos autovalores são exibidos em \ref{eq:autovalores}.
-Os autovalores escolhidos para a dinâmica do preditor linear são exibidos a seguir:
+Foi decidido que a dinâmica do estimador de estados deve ser 3 vezes  mais rápida do que a dinâmica do sistema linearizado, cujos autovalores são exibidos em \ref{eq:autovalores}. Foi adicionado um valor de offset aos autovalores da planta original, os autovalores resultantes para a dinâmica do preditor linear são exibidos a seguir:
 
  \begin{equation} \label{eq:autovalores_pred}
         \begin{split}
-             lambda=\mathbf{eig(Â)}=\
+              \mathbf{eig(A-L*C)}=\
         \end{split}
         \begin{bmatrix}
-            -0.1913& + 1.6918i&\\
-            -0.1913& - 1.6918i&\\
-            -1.8001& +14.4646i&\\
-            -1.8001& -14.4646i&\\
+             -36.0016& +72.3231i&\\
+             -36.0016& -72.3231i&\\
+             -27.9577& +47.1507i&\\
+             -27.9577& -47.1507i&\\
         \end{bmatrix}
     \end{equation}
 
@@ -842,14 +841,38 @@ Desta maneira, foi encontrada a seguinte matriz de ganhos de realimentação par
             \mathbf{L}=\
         \end{split}
         \begin{bmatrix}
-            0.0059& 0.0059& 0.0059& 0.0059&\\
-            0.0005& 0.0005& 0.0005& 0.0005&\\
-            0.0001& 0.0001& 0.0001& 0.0001&\\
-            0.0000& 0.0000& 0.0000& 0.0000&\\
+          -49.2677& -49.2677& -49.2677& -49.2677&\\
+          157.2726& 157.2726& 157.2726& 157.2726&\\
+            6.0681&   6.0681&   6.0681&   6.0681&\\
+          715.2966& 715.2966& 715.2966& 715.2966&\\
         \end{bmatrix}
     \end{equation}
 
     Uma simulação temporal do sistema não linear controlado pelo ganho de realimentação de estados, obtido através do preditor desenvolvido nesta seção é exibido nas figuras abaixo:
+
+    \FloatBarrier
+    \begin{figure}[htbp]
+        \begin{centering}
+            \includegraphics[width=8cm]{img/simulaca_temporal_preditor_linear.png}
+            \includegraphics[width=7cm]{img/simulaca_temporal_preditor_linear_erro_leg.png}
+            \caption{Simulação da resposta temporal do sistema original com o controlador e o preditor lineares em malha fechada.}
+            \label{fig:simulaca_temporal_linear_perturbacao}
+        \end{centering}
+    \end{figure}
+    \FloatBarrier
+
+    \FloatBarrier
+    \begin{figure}[htbp]
+        \begin{centering}
+            \includegraphics[width=8cm]{img/simulaca_temporal_preditor_linear_erro.png}
+            \includegraphics[width=7cm]{img/simulaca_temporal_preditor_linear_erro_leg.png}
+            \caption{Simulação do erro dos estados entre o sistema original e o preditor lineares em malha fechada.}
+            \label{fig:simulaca_temporal_linear_perturbacao}
+        \end{centering}
+    \end{figure}
+    \FloatBarrier
+
+    O desempenho do sistema real controlado em malha fechada com restrição dos estados observáveis ficou um pouco pior quando comparado com a situação onde todos os estados são observáveis. Especialmente durante os transitórios da perturbação. No entanto, para pequenas variações, o controle baseado em realimentação de estados de um observador linear se mostrou satisfatório.
 
     \section{Resultados}
     \section{Conclusão}
