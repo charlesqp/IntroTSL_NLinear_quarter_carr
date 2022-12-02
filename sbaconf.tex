@@ -826,6 +826,20 @@ Foi decidido que a dinâmica do estimador de estados deve ser 3 vezes  mais ráp
         \end{bmatrix}
     \end{equation}
 
+Na figura a seguir é demonstrado como ficou o design de todos os autovalores do projeto.
+
+    \FloatBarrier
+    \begin{figure}[htbp]
+        \begin{centering}
+            \includegraphics[width=8cm]{img/simulaca_temporal_preditor_linear_erro.png}
+            \includegraphics[width=7cm]{img/simulaca_temporal_preditor_linear_erro_leg.png}
+            \caption{Simulação do erro dos estados entre o sistema original e o preditor lineares em malha fechada.}
+            \label{fig:simulaca_temporal_linear_perturbacao}
+        \end{centering}
+    \end{figure}
+    \FloatBarrier
+    
+
 Os autovalores foram utilizados para definir o conjunto de ganhos $L$ do observador de estados através da fórmula de Lyapunov definida em \ref{eq:lyapunov}. No entanto empregou-se a seguinte substituição de variáveis:
  \begin{equation} \label{eq:var_pred}
         \begin{split}
