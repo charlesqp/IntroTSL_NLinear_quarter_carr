@@ -14,7 +14,7 @@
 \def\portugues{1} 
 \usepackage[spanish,brazil,english]{babel}
 \usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
+%\usepackage[utf8]{inputenc}
 \usepackage{unicode}
 \usepackage{ae}
 \usepackage{placeins}
@@ -41,7 +41,7 @@
 	
     \begin{frontmatter}
         
-        \title{Trabalho computacional \\Teoria de Sistemas Lineares \\Síntese de observador e controlador por realimentação de estados para controle de suspensão veicular ativa, não-linear} 
+        \title{Síntese de observador e controlador por realimentação de estados para controle de suspensão veicular ativa, não-linear} 
 
         \author[First]{Charles Quirino Pimenta} 
         
@@ -50,20 +50,20 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
         
         \selectlanguage{english}
         \renewcommand{\abstractname}{{\bf Abstract:~}}
-        \begin{abstract} Colocar o abstract em ingles aqui
+        \begin{abstract} This work presents a synthesis methodology of a state-feedback controller and an observer for time-invariant linear systems, in addition to evaluating their performance through temporal simulations. A non-linear system extracted from the literature was chosen, an active vehicle suspension model for a quarter of a car. In this system, the non-linearities are present in the springs and in the damper. The synthesis conditions were programmed, simulated and evaluated in Matlab\textsuperscript{\textregistered} environment. The temporal simulation results were presented and at the end a brief conclusion is presented.
         
         \vskip 1mm% não altere esse espaçamento
         \selectlanguage{brazil}
-        {\noindent \bf Resumo}:Colocar o abstract em português aqui
+        {\noindent \bf Resumo}: Este trabalho apresenta uma metodologia de síntese de um controlador por realimentação de estados e um observador para sistemas lineares invariantes no tempo além de avaliar o seu desempenho por meio de simulações temporais. Foi escolhido um sistema não linear extraído da literatura, um modelo de suspensão veicular ativa para um quarto de carro. Neste sistema as não linearidades estão presentes no feixe de molas e no amortecedor. As condições de síntese foram programadas, simuladas e avaliadas em ambiente Matlab\textsuperscript{\textregistered}. Foram apresentados os resultados de simulação temporal e ao final é apresentada uma breve conclusão.
         \end{abstract}
         
         \selectlanguage{english}
         
-        \begin{keyword} Colocar palavres chave em ingles aqui 
+        \begin{keyword} Linear systems; LTI; State feedback control; State Observer; Luenberger Observer; Vehicle active suspension;
         
         \vskip 1mm% não altere esse espaçamento
         \selectlanguage{brazil}
-        {\noindent\it Palavras-chaves:} Colocar palavres chave em português aqui 
+        {\noindent\it Palavras-chaves:} Sistemas lineares; LTI; Controle por realimentação de estados; Observador de estados; Observador de Luenberger; Suspensão ativa veicular;
         \end{keyword}
         
         \selectlanguage{brazil}
@@ -71,16 +71,14 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
         \end{frontmatter}
 
     \section{Introdução}
-    Em sistemas veiculares automotores é necessário controlar as vibrações de sistemas mecânicos com a finalidade de minimizar as vibrações transmitidas ao chassi do veículo e proporcionar maior conforto aos seus utilizadores.
-    Em veículos é necessário realizar o controle de vibrações transmitidas pela pista, uma vez que estas causam desconforto aos passageiros e diminuem o contato entre pneu e pista, e diminuem a estabilidade do veículo.
+   $ $
     Existem três tipos de suspensão veicular: suspensão passiva, ativa e semiativa. Esta classificação é dada de acordo com a presença e o tipo de controle utilizado para minimizar as vibrações transmitidas ao chassi.
-    Sistemas de controle passivo são os sistemas de suspensão convencionais, são compostos por molas, amortecedores e pneus. O sistema de controle passivo só é capaz de atuar em uma banda de frequência restrita, limitando-se a utilização em sistemas com frequências fora desta banda. Este sistema proporciona uma viagem menos confortável e estável ao carro em comparação aos sistemas de amortecimento ativo e semiativo.
-    Um sistema de suspensão ativa é um sistema capaz de atuar em diferentes bandas de frequência, através da utilização de atuadores, sensores e sistemas eletrônicos de controle. A sua desvantagem está na elevada quantidade de energia que os componentes utilizados necessitam, necessitando do uso de uma fonte de energia externa, isto implica em um produto final de custo mais elevado quando comparado com sistemas de suspensão passiva.
+    Sistemas de controle passivo são os sistemas de suspensão convencionais, compostos por molas, amortecedores e pneus. O sistema de controle passivo só é capaz de atuar em uma banda de frequência restrita, limitando-se a utilização em sistemas com frequências fora desta banda. Este sistema proporciona uma viagem menos confortável e estável ao carro em comparação aos sistemas de amortecimento ativo e semiativo.
+    Um sistema de suspensão ativa é um sistema capaz de atuar em diferentes bandas de frequência, através da utilização de atuadores, sensores e sistemas eletrônicos de controle. A desvantagem está na elevada quantidade de energia que os componentes utilizados necessitam, demandando o uso de uma fonte de energia externa, isto implica em um produto final de custo mais elevado quando comparado com sistemas de suspensão passiva.
     Um sistema de suspensão semiativa também apresenta funcionalidade em diversas bandas de frequência e não possui a obrigatoriedade de uma fonte de tensão externa permanente de grande porte. Outra vantagem deste tipo de sistema é que este, na falta de energia, comporta-se como um sistema passivo, agregando mais confiabilidade e segurança ao veículo. Por fim, um sistema de suspensão semiativa possui custo intermediário entre as demais opções.
-    Neste trabalho, focou-se sobre o sistema de suspensão ativa com um atuador generalizado. Este trabalho apresentará a implementação de um controlador ativo aplicado a um sistema de suspensão veicular com modelo não linearizado.
+    O foco deste trabalho recai sobre o sistema de suspensão ativa com um atuador generalizado, apresentando assim a implementação de um controlador ativo aplicado a um sistema de suspensão veicular com modelo não linear.
     \section{Objetivos}
-    Projetar e analisar um observador e um controlador por realimentação no espaço de estados para o modelo linearizado de um sistema de suspensão veicular ativa, não-linear, através do controle da amplitude da aceleração e deslocamento vertical aos quais os passageiros estão submetidos. 
-    
+    Projetar e analisar um observador e um controlador por realimentação no espaço de estados para o modelo linearizado de um sistema de suspensão veicular ativa, não-linear, através do controle da amplitude da aceleração e deslocamento vertical aos quais os passageiros estão submetidos.     
     Para alcançar o objetivo principal, os seguintes objetivos específicos foram propostos:
     \begin{itemize}
         \item Realizar a modelagem matemática de um sistema de suspensão não linear de um quarto de veículo com dois graus de liberdade
@@ -90,24 +88,24 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
         \item Realizar simulações temporais com o controlador proposto para o sistema linearizado e original.
     \end{itemize}
     \section{Revisão Bibliográfica}
-    \subsection{Modelo matemático do sistema de suspensão não linear para um quarto de veículo }
-    O modelo de um quarto de carro consiste em isolar uma quarta parte do veiculo e estudar isoladamente o comportamento do sistema de suspensão para esta seção. Para veículos com peso igualmente distribuído, os resultados são muito próximos ao do modelo completo. Geralmente os modelos para um quarto de carro tem 2 graus de liberdade, sendo estes o deslocamento vertical da massa suspensa e da massa não suspensa. Este modelo pode ser observado na figura \ref{fig:massa_mola_nao_linear_controlavel} a seguir. Este modelo é composto por uma massa suspensa que representa a carroceria do veiculo e uma massa não suspensa que representa o conjunto eixo e roda. Estas massas são conectadas pela mola e pelo amortecedor. O contato do veiculo com a pista de rolamento é realizado através do pneu. O sistema é exitado, ou perturbado, pelas irregularidades da pista.
+        \subsection{Modelo matemático do sistema de suspensão não linear para um quarto de veículo }
+    O modelo de um quarto de carro consiste em isolar uma quarta parte do veículo e estudar isoladamente o comportamento do sistema de suspensão para esta seção. Para veículos com peso igualmente distribuído, os resultados são muito próximos ao do modelo completo. Geralmente os modelos para um quarto de carro tem 2 graus de liberdade, sendo estes o deslocamento vertical da massa suspensa e da massa não suspensa, o que pode ser observado na figura \ref{fig:massa_mola_nao_linear_controlavel} a seguir. Este modelo é composto por uma massa suspensa que representa a carroceria do veículo e uma massa não suspensa que representa o conjunto eixo e roda. Estas massas são conectadas pela mola e pelo amortecedor. O contato do veículo com a pista de rolamento é realizado através do pneu. O sistema é exitado, ou perturbado, pelas irregularidades da pista.
     \FloatBarrier
     \begin{figure}[htbp]
         \begin{centering}
-            \includegraphics[width=5cm]{img/massa_mola_nao_linear_controlavel.png}
+            \includegraphics[width=8cm]{img/massa_mola_nao_linear_controlavel.png}
             \caption{Modelo de suspensão para um quarto de carro.} 
             \label{fig:massa_mola_nao_linear_controlavel}
         \end{centering}
     \end{figure}
     \FloatBarrier
-    Na figura \ref{fig:massa_mola_nao_linear_controlavel} temos que $m_s$ representa a massa suspensa que consiste em um quarto da massa total da carroceria do veiculo em \emph{kg}, $m_u$ representa a massa não suspensa ou a massa do eixo e da roda em \emph{kg}, $b_s$ representa o o coeficiente de amortecimento do amortecedor passivo em \emph{Ns/m}, $k_s$ representa o coeficiente de elasticidade do feixe de molas da suspensão, segundo a lei de hooke, em \emph{N/m}, $k_t$ representa o coeficiente de elasticidade do pneu, segundo a lei de hooke, em \emph{N/m}, $x_r$ representa o deslocamento vertical da pista, onde o sufixo $r$ significa \emph{road}, em \emph{m}, $x_w$ representa o deslocamento vertical da roda, onde o sufixo $w$ significa \emph{wheel}, em \emph{m} e $x_c$ representa o deslocamento vertical da carroceria, onde o sufixo $c$ significa \emph{carr}, em \emph{m}. Na mesma figura o simbolo $F$ representa a atuação de um dispositivo amortecedor com características dinâmicas, seja ele ativo ou semi-ativo, em \emph{N}.
+    Na figura \ref{fig:massa_mola_nao_linear_controlavel}, $m_s$ representa a massa suspensa que consiste em um quarto da massa total da carroceria do veículo em \emph{kg}, $m_u$ representa a massa não suspensa ou a massa do eixo e da roda em \emph{kg}, $b_s$ representa o coeficiente de amortecimento do amortecedor passivo em \emph{Ns/m}, $k_s$ representa o coeficiente de elasticidade do feixe de molas da suspensão, segundo a lei de Hooke, em \emph{N/m}, $k_t$ representa o coeficiente de elasticidade do pneu, segundo a lei de Hooke, em \emph{N/m}, $x_r$ representa o deslocamento vertical da pista, onde o sufixo $r$ significa \emph{road}, em \emph{m}, $x_w$ representa o deslocamento vertical da roda, onde o sufixo $w$ significa \emph{wheel}, em \emph{m} e $x_c$ representa o deslocamento vertical da carroceria, onde o sufixo $c$ significa \emph{carr}, em \emph{m}. Na mesma figura o simbolo $F$ representa a atuação de um dispositivo amortecedor com características dinâmicas, seja ele ativo ou semi-ativo, em \emph{N}.
     
     O diagrama de corpo livre do sistema pode ser construído tomando-se como referencia a coordenada da posição do eixo da roda $x_w$ como pode ser observado nas figuras \ref{fig:corpo_livre_ms} e \ref{fig:corpo_livre_mu} a seguir:
     \FloatBarrier
     \begin{figure}[htbp]
         \begin{centering}
-            \includegraphics[width=5cm]{img/corpo_livre_ms.png}
+            \includegraphics[width=8cm]{img/corpo_livre_ms.png}
             \caption{Diagrama de corpo livre para a massa $m_s$.} 
             \label{fig:corpo_livre_ms}
         \end{centering}
@@ -115,7 +113,7 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
     \FloatBarrier
     \begin{figure}[htbp]
         \begin{centering}
-            \includegraphics[width=5cm]{img/corpo_livre_mu.png}
+            \includegraphics[width=8cm]{img/corpo_livre_mu.png}
             \caption{Diagrama de corpo livre para a massa $m_u$.} 
             \label{fig:corpo_livre_mu}
         \end{centering}
@@ -127,7 +125,7 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
     \begin{equation} \label{eq:massa_mola_linear}
     \begin{split}
         m_{s} \ddot{x}_{c} =&  b_{s}(\dot{x}_{w}-\dot{x}_{c}) + k_{s}(x_{w}-x_{c}) - F\ \\
-        m_{u} \ddot{x}_{w} =& -b_{s}(\dot{x}_{w}-\dot{x}_{c}) - k_{s}(x_{w}-x_{c})  k_{t}(x_{w}-x_{r}) + F
+        m_{u} \ddot{x}_{w} =& -b_{s}(\dot{x}_{w}-\dot{x}_{c}) - k_{s}(x_{w}-x_{c})+k_{t}(x_{w}-x_{r}) + F
     \end{split}
     \end{equation}
     
@@ -151,7 +149,7 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
     
     Na equação \ref{eq:amortecedor_nao_linear} o coeficiente $b^{l}_{s}$ representa o coeficiente de amortecimento do termo da faixa de operação linear, o coeficiente $b^{l}_{s}$ representa o coeficiente de amortecimento do termo da faixa de operação não linear e o coeficiente $b^{y}_{s}$ representa a característica de comportamento assimétrico do amortecedor.
     
-    Substituindo as equações \ref{eq:mola_nao_linear} e \ref{eq:amortecedor_nao_linear} em \ref{eq:massa_mola_linear} obtemos as seguintes equações diferenciais dinâmicas de segunda ordem que representam a dinâmica de um sistema de suspensão ativa não linear:
+    Substituindo as equações \ref{eq:mola_nao_linear} e \ref{eq:amortecedor_nao_linear} em \ref{eq:massa_mola_linear}, obtemos as seguintes equações diferenciais dinâmicas de segunda ordem que, representam a dinâmica de um sistema de suspensão ativa não linear:
     
     \begin{equation} \label{eq:massa_mola_nao_linear}
         \begin{aligned}
@@ -163,8 +161,8 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
                             -&k_{t}(x_{w}-x_{r})+F\\
         \end{aligned}
     \end{equation}
-    \subsection{Modelo Linearizado de um sistema de suspensão semi-ativa, não linear, de um quarto de veículo, com dois graus de liberdade }
-    Realizando a distributiva no sistema descrito em \ref{eq:massa_mola_nao_linear} e Propondo as seguintes substituições para as variáveis de estado das equações e reorganizando os termos, obtemos: 
+        \subsection{Modelo Linearizado de um sistema de suspensão semi-ativa, não linear, de um quarto de veículo, com dois graus de liberdade }
+    Realizando a distributiva no sistema descrito em \ref{eq:massa_mola_nao_linear} e propondo as seguintes substituições para as variáveis de estado das equações e reorganizando os termos, obtemos: 
     \begin{equation*}
         \begin{split}
             x_{1}=&x_{c};\ \ \\
@@ -183,7 +181,7 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
             u=&F;\ \ \\
         \end{split} 
     \end{equation*}
-    \begin{equation} \label{eq:massa_mola_nao_linear}
+    \begin{equation} \label{eq:massa_mola_nao_linear_SS}
         \begin{aligned}
         \dot{x}_{1}=&\ \ \ \ x_{2}\\
         \dot{x}_{2}=&-\frac{k^l_s}{m_s}x_1-\frac{b^l_s}{m_s}x_2+\frac{k^l_s}{m_s}x_3+\frac{b^l_s}{m_s}x_4-\frac{k^{nl}_s}{m_s}(x_3-x_1)^3\\
@@ -196,9 +194,9 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
         \end{aligned}
     \end{equation}
     
-    \subsection{Linearização do modelo em espaço de estados}
+        \subsection{Linearização do modelo em espaço de estados}
     
-    Um sistema dinâmico descrito por meio de equações diferenciais não lineares pode ser linearizado na proximidade de um ponto de equilíbrio através do método da expansão em série de Taylor truncada no seu segundo termo como exibido na equação a seguir:
+    Um sistema dinâmico descrito por meio de equações diferenciais não lineares, pode ser linearizado na proximidade de um ponto de equilíbrio, através do método da expansão em série de Taylor truncada no seu segundo termo como exibido na equação a seguir:
     
     \begin{equation}
         P(x) = f(\alpha) + \dfrac{\mathrm{d}f(\alpha)}{\mathrm{d}x}*\frac{(x-\alpha)^{-1}}{1!}    
@@ -273,8 +271,8 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
      \end{itemize}
      
     
-    \subsection{Especificações da Resposta Transitória para Sistemas Subamortecidos}
-    As características de um sistema de controle são geralmente especificadas em termos da resposta transitória para uma entrada em degrau. Para sistemas LIT, quando a resposta ao degrau é conhecida, pode-se calcular a resposta a qualquer tipo de entrada e Costuma-se utilizar condição inicial de sistema em repouso. As seguintes especificações são as mais utilizadas:
+        \subsection{Especificações da Resposta Transitória para Sistemas Subamortecidos}
+    As características de um sistema de controle são geralmente especificadas em termos da resposta transitória para uma entrada em degrau. Para sistemas LIT, quando a resposta ao degrau é conhecida, pode-se calcular a resposta a qualquer tipo de entrada e costuma-se utilizar condição inicial de sistema em repouso. As seguintes especificações são as mais utilizadas:
     \begin{itemize}
         \item  Tempo de atraso - $t_d$: tempo necessário para que a resposta alcance metade do seu valor final pela primeira vez.
         \item  Tempo de subida - $t_r$: tempo requerido para que a resposta passe de 10\% a 90\%, ou de 5\% a 95\%, ou de 0\% a 100\% do valor final. Para sistemas de 2ª ordem subamortecido, utiliza-se 0\% a 100\% do valor final. Para sistemas superamortecidos, geralmente considera-se de 10\% a 90\%.
@@ -285,8 +283,8 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
         \begin{equation} \label{eq:tp}
             t_p = \frac{\pi}{\omega_d}
         \end{equation}
-        \item Máximo Overshoot $MO$: valor máximo de pico da curva de resposta, medido a partir da unidade. Se o valor da resposta em regime diferir da unidade, utiliza-se a porcentagem máxima de sobressinal (ou ultrapassagem percentual, U.P.):
-        \begin{equation} \label{eq:MO}
+        \item Máximo overshoot $MO$: valor máximo de pico da curva de resposta, medido a partir da unidade. Se o valor da resposta em regime diferir da unidade, utiliza-se a porcentagem máxima de sobressinal (ou ultrapassagem percentual, U.P.):
+        \begin{equation} \label{eq:MaxOv}
         \begin{split}
             M_O=\exp{(\frac{-\xi.\pi}{\sqrt(1-\xi^2)})}\\
             \xi=-\frac{ln\left( M_O \right)}{\sqrt{\pi^2+ln^2(M_O)}}    
@@ -315,7 +313,7 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
             \omega_d=\omega_n\sqrt{1-\xi^2}
     \end{equation}
     
-    \subsection{Alocação de polos pela fórmula de Lyapunov} \label{sc:lyapunov}
+        \subsection{Alocação de autovalores pela fórmula de Lyapunov} \label{sc:lyapunov}
     
     Considere o par $(A,b)$ controlável, com $A \in \mathbb{R}^{n*n}$ e $b \in \mathbb{R}^{n*1}$. Dada uma matriz $F \in \mathbb{R}^{n*n}$ arbitrária com os autovalores desejados para a resposta do sistema dinâmico em malha fechada, é possível encontrar um vetor de ganhos de realimentação $K\in \mathbb{R}^{1*n}$ tal que $eig(A-b*K)=eig(F)$ desde que $eig(A)\neq eig(F)$ através dos seguintes passos:
     
@@ -333,7 +331,7 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
     \end{enumerate}
     
     \section{Metodologia}
-    \subsection{Linearização do modelo em espaço de estados}
+        \subsection{Linearização do modelo em espaço de estados}
         
     O sistema proposto possui um ponto de equilíbrio na origem do sistema:
     \begin{equation*}
@@ -344,7 +342,7 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
         x_4=\ \ &0\\
         \end{split}
     \end{equation*}
-    Para realizar a linearização em torno do ponto de operação escolhido calcula-se a Jacobiana do sistema de equações dinâmicas não lineares descrito em \ref{eq:massa_mola_nao_linear} através das equações \ref{eq:Jacobian_A} e \ref{eq:Jacobian_B}. Em seguida, calculou-se o valor da Jacobiana no valor especifico do ponto de equilibro, conforme as equações \ref{eq:eval_A} e \ref{eq:eval_B}, obtemos as matrizes $A$ e $B$ do sistema linearizado exibidas a seguir:
+    Para realizar a linearização em torno do ponto de operação escolhido calcula-se a Jacobiana do sistema de equações dinâmicas não lineares descrito em \ref{eq:massa_mola_nao_linear} através das equações \ref{eq:Jacobian_A} e \ref{eq:Jacobian_B}. Em seguida, calculou-se o valor da Jacobiana no valor específico do ponto de equilibro, conforme as equações \ref{eq:eval_A} e \ref{eq:eval_B}, obtemos as matrizes $A$ e $B$ do sistema linearizado exibidas a seguir:
  
     \begin{equation*} 
     \begin{split}
@@ -379,9 +377,10 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
     \end{split}
     \end{equation}
     
-    É esperado que o  sistema linearizado se aproxime do sistema não linear enquanto opere na vizinhança do ponto de equilíbrio utilizado para linearização. Que para este caso é a origem do sistema formado pelas variáveis de estado.
-    \subsection{Simulação da resposta temporal do modelo linearizado em malha aberta}
-    Abaixo seguem figuras que ilustram a simulação temporal do sistema não linear e linearizado para 3 diferentes condições iniciais a parâmetros do sistema dados a seguir: 
+    É esperado que o  sistema linearizado se aproxime do sistema não linear enquanto opera na vizinhança do ponto de equilíbrio utilizado para linearização. Que para este caso é a origem do sistema formado pelas variáveis de estado.
+    
+        \subsection{Simulação da resposta temporal do modelo linearizado em malha aberta}
+    Abaixo, seguem figuras que ilustram a simulação temporal do sistema não linear e linearizado para 3 diferentes condições iniciais a parâmetros do sistema dados a seguir: 
     
     \begin{equation*} 
     \begin{split}
@@ -414,10 +413,10 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
     \FloatBarrier
     \begin{figure}[htbp]
         \begin{centering}
-            \includegraphics[width=6cm]{img/sim_temp_xc_n001_dxc_n001.png}
-            \includegraphics[width=5cm]{img/sim_temp_Leg.png}
+            \includegraphics[width=7cm]{img/sim_temp_xc_n001_dxc_n001.png}
+            \includegraphics[width=6cm]{img/sim_temp_Leg.png}
             \caption{Simulação temporal do sistema para as condições iniciais:  $[x_c, \dot{x}_c, x_w, \dot{x}_w]=[-0.01,-0.01,0,0]$}
-            \label{fig:sim_temp_xc_n01_dxc_n01}
+            \label{fig:sim_temp_xc_n001_dxc_n001}
         \end{centering}
     \end{figure}
     \FloatBarrier
@@ -425,8 +424,8 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
     \FloatBarrier
     \begin{figure}[htbp]
         \begin{centering}
-            \includegraphics[width=6cm]{img/sim_temp_xc_n01_dxc_n01.png}
-            \includegraphics[width=5cm]{img/sim_temp_Leg.png}
+            \includegraphics[width=7cm]{img/sim_temp_xc_n01_dxc_n01.png}
+            \includegraphics[width=6cm]{img/sim_temp_Leg.png}
             \caption{Simulação temporal do sistema para as condições iniciais:  $[x_c, \dot{x}_c, x_w, \dot{x}_w]=[-0.1,-0.1,0,0]$}
             \label{fig:sim_temp_xc_n01_dxc_n01}
         \end{centering}
@@ -436,17 +435,17 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
     \FloatBarrier
     \begin{figure}[htbp]
         \begin{centering}
-            \includegraphics[width=6cm]{img/sim_temp_xc_n05_dxc_n05.png}
-            \includegraphics[width=5cm]{img/sim_temp_Leg.png}
+            \includegraphics[width=7cm]{img/sim_temp_xc_n05_dxc_n05.png}
+            \includegraphics[width=6cm]{img/sim_temp_Leg.png}
             \caption{Simulação temporal do sistema para as condições iniciais:  $[x_c, \dot{x}_c, x_w, \dot{x}_w]=[-0.5,-0.5,0,0]$}
-            \label{fig:sim_temp_xc_n01_dxc_n01}
+            \label{fig:sim_temp_xc_n05_dxc_n05}
         \end{centering}
     \end{figure}
     \FloatBarrier
     
     Pode-se observar a diferença dramática entre as simulações temporais dos sistemas para a condição inicial $[x_c, \dot{x}_c, x_w, \dot{x}_w]=[-0.5,-0.5,0,0]$ devido a esta ser a que mais se afasta do ponto de equilíbrio utilizado para linearização do sistema
     
-    \subsection{Análise da estabilidade do sistema em malha aberta}
+        \subsection{Análise da estabilidade do sistema em malha aberta}
     
     Para o sistema linearizado com parâmetros dados pela equação \ref{eq:parametros} obtemos os seguinte conjunto de autovalores para a Matriz $A$ do sistema:
     
@@ -473,7 +472,7 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
     
     \begin{equation} \label{eq:autovalores}
         \begin{split}
-             lambda=\mathbf{eig(A)}=\
+             \lambda=\mathbf{eig(A)}=\
         \end{split}
         \begin{bmatrix}
             -9.0004& +72.3231i&\\
@@ -483,13 +482,13 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
         \end{bmatrix}
     \end{equation}
         
-    Pode-se observar em \ref {eq:autovalores} que o sistema possui, como autovalores, dois pares de polos complexos conjugados com parte real negativa. Logo, pode-se concluir que o sistema é estável internamente. Como estabilidade interna implica em BIBO estabilidade, pode-se dizer que o sistema também é BIBO estável.
+    Pode-se observar em \ref {eq:autovalores} que o sistema possui, como autovalores, dois pares de autovalores complexos conjugados com parte real negativa. Logo, pode-se concluir que o sistema é estável internamente. Como estabilidade interna implica em BIBO estabilidade, pode-se dizer que o sistema também é BIBO estável.
     Na figura \ref{fig:autovalores_malha_aberta} abaixo podemos observar a localização dos autovalores em malha aberta do sistema linearizado no plano imaginário.
     
     \FloatBarrier
     \begin{figure}[htbp]
         \begin{centering}
-            \includegraphics[width=7cm]{img/autovalores_malha_aberta.png}
+            \includegraphics[width=8cm]{img/autovalores_malha_aberta.png}
             \includegraphics[width=3cm]{img/autovalores_malha_aberta_leg.png}
             \caption{Autovalores do sistema linearizado em malha aberta}
             \label{fig:autovalores_malha_aberta}
@@ -499,9 +498,9 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
     
     Através do gráfico da figura \ref{fig:autovalores_malha_aberta}, pode-se observar que o sistema possui um par de autovalores dominantes, com frequência de oscilação da resposta de $8.4588 rad.s^{-1}$ e taxa de amortecimento de $0.1124$. Além disso, o sistema possui um outro par de autovalores não dominantes com frequência de oscilação da resposta de $72.3231 rad.s^{-1}$ e taxa de decaimento de $0.1235$
     
-    \subsection{Análise da Controlabilidade e da observabilidade do sistema linearizado}
+        \subsection{Análise da Controlabilidade e da observabilidade do sistema linearizado}
     
-    Primeiramente definiremos a matriz $\mathbf{C}$ para termos como saída apenas os estados do sistema referentes a posição das massas suspensa e não suspensa, como demonstrado em \ref{eq:matriz_c} exibida a seguir:
+    Primeiramente definiremos a matriz $\mathbf{C}$ para termos como saída apenas os estados do sistema referentes a posição das massas suspensa e não suspensa, como demonstrado na equação \ref{eq:matriz_c} exibida a seguir:
      \FloatBarrier
     \begin{equation} \label{eq:matriz_c}
         \begin{split}
@@ -568,11 +567,12 @@ Minas Gerais - Av. Antônio Carlos 6627, 31270-901, Belo Horizonte, MG, Brasil\\
 
 Dado que a ordem do sistema linearizado é $\mathbf{n}=4$, e como o $Rank(M_C)=4$ e $Rank(M_O)=4$, pode-se afirmar que o sistema linearizado é controlável e observável.
 
-\subsection{Projeto de um controlador por realimentação de estados} \label{sc:projeto_controlador_full}
+    
+        \subsection{Projeto de um controlador por realimentação de estados} \label{sc:projeto_controlador_full}
 
-Escolheu-se definir os requisitos temporais para projeto do controlador por realimentação de estados separadamente para cada par de polos do sistema. Para o par de polos de resposta rápida, correspondentes à dinâmica da massa suspensa no eixo das rodas, deseja-se um valor de Máximo Overshoot $M_O \leq 10$ \% e Tempo de acomodação para a faixa de tolerância de 2 \% $T_S \leq 0.1$ s. Os resultados numéricos são apresentados com arredondamento na quarta casa decimal.
+Foi definida a escolha dos requisitos temporais para projeto do controlador por realimentação de estados separadamente para cada par de autovalores do sistema. Para o par de autovalores de resposta rápida, correspondentes à dinâmica da massa suspensa no eixo das rodas, deseja-se um valor de Máximo overshoot $M_O \leq 10$ \% e Tempo de acomodação para a faixa de tolerância de 2 \% $T_S \leq 0.1$ s. Os resultados numéricos são apresentados com arredondamento na quarta casa decimal.
 
-Dada a equação \ref{eq:MO} para o cálculo da Taxa de amortecimento para um valor de máximo overshoot dado, obtém-se o seguinte valor objetivo para $\xi$:
+Dada a equação \ref{eq:MaxOv} para o cálculo da taxa de amortecimento para um valor de máximo overshoot dado, obtém-se o seguinte valor objetivo para $\xi$:
 
 \begin{equation*}
     \xi=-\frac{ln\left(0.1\right)}{\sqrt{\pi^2+ln^2(0.1)}}=0.5912
@@ -584,22 +584,22 @@ Dada a equação \ref{eq:Ts2} para o cálculo da $\omega_n$ objetivo para um tem
     \omega_n=-\frac{ln\left( 0.02*\sqrt{1-0.5912} \right)}{0.1*0.5912}=73.7409
 \end{equation*}
 
-A alocação dos polos $\lambda = \sigma \pm \omega_n.i$ é determinada a partir da aplicação dos valores encontrados nas equações \ref{eq:xi} e \ref{eq:wd} e \ref{eq:eign}
+A alocação dos autovalores $\lambda = \sigma \pm \omega_n.i$ é determinada a partir da aplicação dos valores encontrados nas equações \ref{eq:xi} e \ref{eq:wd} e \ref{eq:eign}
 
-\begin{align} \label{eq:polos_de_xi}
+\begin{align} \label{eq:autovalores_de_xi}
      \lambda = \omega_n * (-\xi \pm \sqrt{1-\xi^2}.i)
 \end{align}
 
-Para os polos de resposta rápida obtemos:
+Para os autovalores de resposta rápida obtemos:
 
-\begin{align*} \label{eq:polos_nao_dominantes}
+\begin{align*} \label{eq:autovalores_nao_dominantes}
      \lambda_1 = -43.5923 + 47.1507*i\\
      \lambda_2 = -43.5923 - 47.1507*i\\
 \end{align*}
 
-Para os polos de resposta lenta, correspondentes a massa não suspensa do quarto de veiculo, deseja-se um valor de Máximo Overshoot $M_O \leq 10$ \% e Tempo de acomodação para a faixa de tolerância de 2 \% $T_S \leq 0.5$ s. Os resultados numéricos são apresentados com arredondamento na quarta casa decimal.
+Para os autovalores de resposta lenta, correspondentes a massa não suspensa do quarto de veículo, deseja-se um valor de Máximo overshoot $M_O \leq 10$ \% e Tempo de acomodação para a faixa de tolerância de 2 \% $T_S \leq 0.5$ s. Os resultados numéricos são apresentados com arredondamento na quarta casa decimal.
 
-Calcula-se os coeficientes $\xi$ e $\omega_n$ da mesma forma que para os polos não dominantes assim obtendo os autovalores correspondentes:
+Calcula-se os coeficientes $\xi$ e $\omega_n$ da mesma forma que para os autovalores não dominantes assim obtendo os autovalores correspondentes:
 
 \begin{equation*}
     \xi=-\frac{ln\left(0.1\right)}{\sqrt{\pi^2+ln^2(0.1)}}=0.5912
@@ -609,12 +609,12 @@ Calcula-se os coeficientes $\xi$ e $\omega_n$ da mesma forma que para os polos n
     \omega_n=-\frac{ln\left( 0.02*\sqrt{1-0.5912} \right)}{0.5*0.5912}=14.7482
 \end{equation*}
 
-\begin{align*} \label{eq:polos_dominantes}
+\begin{align*} \label{eq:autovalores_dominantes}
      \lambda_3 = -8.7185 + 9.4301*i\\
      \lambda_4 = -8.7185 - 9.4301*i\\
 \end{align*}
 
-Desta maneira obtemos a seguinte disposição de polos para o sistema em malha fechada:
+Desta maneira obtemos a seguinte disposição de autovalores para o sistema em malha fechada:
 
 \begin{equation} \label{eq:autovalores_malha_fechada}
         \begin{split}
@@ -628,13 +628,13 @@ Desta maneira obtemos a seguinte disposição de polos para o sistema em malha f
         \end{bmatrix}
     \end{equation}
 
-Uma comparação entre os polos de malha aberta e malha fechada é exibida na figura \ref{fig:autovalores_malha_fechada} exibida a seguir.
+Uma comparação entre os autovalores de malha aberta e malha fechada é exibida na figura \ref{fig:autovalores_malha_fechada} exibida a seguir.
 
     \FloatBarrier
     \begin{figure}[htbp]
         \begin{centering}
-            \includegraphics[width=7cm]{img/autovalores_malha_fechada.png}
-            \includegraphics[width=6cm]{img/autovalores_malha_fechada_leg.png}
+            \includegraphics[width=8cm]{img/autovalores_malha_fechada.png}
+            \includegraphics[width=7cm]{img/autovalores_malha_fechada_leg.png}
             \caption{Comparação entre os Autovalores do sistema linearizado em malha aberta e malha fechada}
             \label{fig:autovalores_malha_fechada}
         \end{centering}
@@ -689,7 +689,7 @@ Uma comparação entre os polos de malha aberta e malha fechada é exibida na fi
     \end{tabular}
     \end{center}
     
-    \subsection{Simulação da resposta temporal do modelo linearizado em malha fechada com controlador por realimentação de estados} \label{sc:analise_resposta}
+        \subsection{Simulação da resposta temporal do modelo linearizado em malha fechada com controlador por realimentação de estados} \label{sc:analise_resposta}
     
     Abaixo seguem gráficos que ilustram a simulação temporal da resposta do sistema linearizado para excitação com entrada em "lombada" degrau de 0.1m:
     \FloatBarrier
@@ -718,16 +718,16 @@ Uma comparação entre os polos de malha aberta e malha fechada é exibida na fi
     
     \begin{itemize}
         \item A realimentação de estados, na forma em que foi projetada, preservou a estabilidade do sistema.
-        \item A realimentação de estados sozinha foi capaz de alterar os polos, ou autovalores, do sistema para as localizações desejadas.
-        \item A nova localização dos polos, ou autovalores, foi capaz de alterar as frequências de resposta forçada do sistema. Isso contribuiu para que este atingisse a estabilização da resposta transitória mais rapidamente do que quando em malha aberta, atingindo as especificações do tempo de assentamento.
-        \item A nova localização dos polos, ou autovalores, foi capaz de atenuar mais rapidamente as frequências de resposta forçada do sistema. Isso contribuiu para que este atingisse a estabilização da resposta transitória mais rapidamente do que quando em malha aberta além de ser capaz de reduzir o overshoot.
+        \item A realimentação de estados sozinha foi capaz de alterar os autovalores, ou autovalores, do sistema para as localizações desejadas.
+        \item A nova localização dos autovalores foi capaz de alterar as frequências de resposta forçada do sistema. Isso contribuiu para que este atingisse a estabilização da resposta transitória mais rapidamente do que quando em malha aberta, atingindo as especificações do tempo de assentamento.
+        \item A nova localização dos autovalores foi capaz de atenuar mais rapidamente as frequências de resposta forçada do sistema. Isso contribuiu para que este atingisse a estabilização da resposta transitória mais rapidamente do que quando em malha aberta além de ser capaz de reduzir o overshoot.
         \item A realimentação de estados sozinha não foi capaz de zerar o erro do estado $\dot{x}_c$ para referência zero quando o sistema foi excitado por um degrau. O que não aconteceu para o sistema em malha aberta. Considerando que o sistema de coordenadas é relativo ao sistema de coordenadas do solo e ao offset inicial de cada componente, espera-se que em regime permanente os estados $x_c$ e $x_w$ estejam na mesma posição que a excitação em $x_r$.
         \item A realimentação de estados tornou o sistema mais rápido por um curto espaço de tempo durante o tempo de subida. Apesar de estar sujeito a um menor overshoot, as massas do sistema sofreram maiores acelerações de pico durante o transitório.
     \end{itemize}
     
     De uma maneira geral a resposta do sistema controlado é bastante satisfatória.
     
-    \subsection{Simulação da resposta temporal do sistema em malha fechada considerando o sistema não linear original utilizando o controlador projetado para o sistema linear}
+        \subsection{Simulação da resposta temporal do sistema em malha fechada considerando o sistema não linear original utilizando o controlador projetado para o sistema linear}
     
     Abaixo seguem gráficos que ilustram a simulação temporal da resposta do sistema não linear comparada com a resposta do sistema linearizado para excitação com entrada em "lombada" degrau de 0.1m:
     
@@ -745,15 +745,15 @@ Uma comparação entre os polos de malha aberta e malha fechada é exibida na fi
 	\FloatBarrier
     \begin{figure}[htbp]
         \begin{centering}
-            \includegraphics[width=7cm]{img/simulaca_temporal_nao_linear_realimentacao_V.png}
-            \includegraphics[width=6cm]{img/sim_nao_linear_simulink_temp_leg.png}
+            \includegraphics[width=8cm]{img/simulaca_temporal_nao_linear_realimentacao_V.png}
+            \includegraphics[width=7cm]{img/sim_nao_linear_simulink_temp_leg.png}
             \caption{Simulação da resposta temporal em malha fechada com o controlador projetado na subseção \ref{sc:projeto_controlador_full} para o sistema linearizado e não linearizado.Estados $V_c = \dot{x}_c$ e $V_w = \dot{x}_w$ }
             \label{fig:simulaca_temporal_nao_linear_realimentacao_V}
         \end{centering}
     \end{figure}
     \FloatBarrier
     
-    A observação dos gráficos da resposta temporal exibida nas figuras \ref{fig:simulaca_temporal_nao_linear_realimentacao} e \ref{fig:simulaca_temporal_nao_linear_realimentacao_V} traz a conclusão que, para este caso especifico, a resposta temporal do sistema não linear em malha fechada com o controlador projetado para o sistema linearizado se mostrou muito semelhante a resposta temporal do sistema linear. Neste caso, contribuíram para isto a excitação com "lombada" em degrau pequena afastou pouco o sistema do ponto de equilíbrio, ao mesmo tempo que um controlador com um amortecimento relativamente alto, $\xi \simeq 0.6$, contribuiu para que a resposta transitória rica em frequências fosse rapidamente cancelada e apenas o comportamento em regime fosse exibido a maior parte do tempo.
+    A observação dos gráficos da resposta temporal exibida nas figuras \ref{fig:simulaca_temporal_nao_linear_realimentacao} e \ref{fig:simulaca_temporal_nao_linear_realimentacao_V} traz a conclusão que, para este caso específico, a resposta temporal do sistema não linear em malha fechada com o controlador projetado para o sistema linearizado se mostrou muito semelhante a resposta temporal do sistema linear. Neste caso, contribuíram para isto a excitação com "lombada" em degrau pequena afastou pouco o sistema do ponto de equilíbrio, ao mesmo tempo que um controlador com um amortecimento relativamente alto, $\xi \simeq 0.6$, contribuiu para que a resposta transitória rica em frequências fosse rapidamente cancelada e apenas o comportamento em regime fosse exibido a maior parte do tempo.
     
     Para comparação, é exibido a seguir a mesma simulação temporal para uma entrada com "lombada" em degrau unitário. Esta entrada excita mais frequências de ambos os sistema e podem revelar mais informações sobre as diferenças entre ambos os sistemas pois leva o sistema linearizado para uma condição de operação mais afastada do ponto de equilíbrio: 
     
@@ -779,78 +779,75 @@ Uma comparação entre os polos de malha aberta e malha fechada é exibida na fi
     \end{figure}
     \FloatBarrier
     
-    A observação dos gráficos da resposta temporal exibida nas figuras \ref{fig:simulaca_temporal_nao_linear_realimentacao_unit} e \ref{fig:simulaca_temporal_nao_linear_realimentacao_unit_V} demonstra que para uma entrada que desloque o sistema para uma região muito distante do ponto de equilíbrio utilizado para linearização pode causar uma grande diferença na resposta temporal do controle em malha fechada, inclusive podendo degradar significativamente o desempenho do controlador por realimentação de estados. 
-
- \subsection{Simulação da resposta temporal em malha fechada com o controlador projetado para o sistema linearizado e considerando perturbação}
+    A observação dos gráficos da resposta temporal exibida nas figuras \ref{fig:simulaca_temporal_nao_linear_realimentacao_unit} e \ref{fig:simulaca_temporal_nao_linear_realimentacao_unit_V} demonstra que para uma entrada que desloque o sistema para uma região muito distante do ponto de equilíbrio utilizado para linearização pode causar uma grande diferença na resposta temporal do controle em malha fechada, inclusive podendo degradar significativamente o desempenho do controlador por realimentação de estados.  
+        \subsection{Simulação da resposta temporal em malha fechada com o controlador projetado para o sistema linearizado e considerando perturbação}
  
-Abaixo seguem gráficos que ilustram a simulação temporal da resposta do sistema linearizado para excitação com perturbações em degraus aleatórios entre $\pm$ 5cm.
+    Abaixo seguem gráficos que ilustram a simulação temporal da resposta do sistema linearizado para excitação com perturbações em degraus aleatórios entre $\pm$ 5cm.
 
-\FloatBarrier
+    \FloatBarrier
     \begin{figure}[htbp]
         \begin{centering}
-            \includegraphics[width=8cm]{img/simulaca_temporal_linear_perturbacao.png}
-            \includegraphics[width=7cm]{img/sim_linear_simulink_temp_leg.png}
+            \includegraphics[width=7cm]{img/simulaca_temporal_linear_perturbacao.png}
+            \includegraphics[width=6cm]{img/sim_linear_simulink_temp_leg.png}
             \caption{Simulação da resposta temporal com o controlador projetado na subseção \ref{sc:projeto_controlador_full} para o sistema linearizado em malha aberta e malha fechada.Estados $X_c = \dot{x}_c$ e $X_w = \dot{x}_w$ }
             \label{fig:simulaca_temporal_linear_perturbacao}
         \end{centering}
     \end{figure}
     \FloatBarrier
-\FloatBarrier
+    \FloatBarrier
     \begin{figure}[htbp]
         \begin{centering}
-            \includegraphics[width=8cm]{img/simulaca_temporal_linear_perturbacao_V.png}
-            \includegraphics[width=7cm]{img/sim_linear_simulink_temp_leg.png}
+            \includegraphics[width=7cm]{img/simulaca_temporal_linear_perturbacao_V.png}
+            \includegraphics[width=6cm]{img/sim_linear_simulink_temp_leg.png}
             \caption{Simulação da resposta temporal com o controlador projetado na subseção \ref{sc:projeto_controlador_full} para o sistema linearizado em malha aberta e malha fechada.Estados $V_c = \ddot{x}_c$ e $V_w = \ddot{x}_w$ }
-            \label{fig:simulaca_temporal_linear_perturbacao}
+            \label{fig:simulaca_temporal_linear_perturbacao_V}
         \end{centering}
     \end{figure}
     \FloatBarrier
-Para a análise da resposta dinâmica do sistema controlado permanecem válidas as mesmas considerações apresentadas na seção \ref{sc:analise_resposta}
+    Para a análise da resposta dinâmica do sistema controlado permanecem válidas as mesmas considerações apresentadas na seção \ref{sc:analise_resposta}
 
-\subsection{Projeto de um controlador baseado no observador para o sistema linearizado considerando
-que apenas algumas variáveis de estado não são mensuráveis}
+    
+        \subsection{Projeto de um controlador baseado no observador para o sistema linearizado considerando
+        que apenas algumas variáveis de estado não são mensuráveis}
 
-Considerou-se para efeitos práticos que as variáveis de estado $x_w$ e $\dot{x}_w$, correspondentes a posição vertical do eixo da roda e sua respectiva velocidade, não são mensuráveis.
+    Considerou-se para efeitos práticos que as variáveis de estado $x_w$ e $\dot{x}_w$, correspondentes a posição vertical do eixo da roda e sua respectiva velocidade, não são mensuráveis.
 
-Foi decidido que a dinâmica do estimador de estados deve ser 3 vezes  mais rápida do que a dinâmica do sistema linearizado, cujos autovalores são exibidos em \ref{eq:autovalores}. Foi adicionado um valor de offset aos autovalores da planta original, os autovalores resultantes para a dinâmica do preditor linear são exibidos a seguir:
+    Foi decidido que a dinâmica do estimador de estados deve ser 4 vezes  mais rápida do que a dinâmica do sistema linearizado, cujos autovalores são exibidos em \ref{eq:autovalores}. Foi adicionado um valor de offset aos autovalores da planta original, os autovalores resultantes para a dinâmica do preditor linear são exibidos a seguir:
 
- \begin{equation} \label{eq:autovalores_pred}
+    \begin{equation} \label{eq:autovalores_pred}
         \begin{split}
               \mathbf{eig(A-L*C)}=\
         \end{split}
         \begin{bmatrix}
              -36.0016& +72.3231i&\\
              -36.0016& -72.3231i&\\
-             -27.9577& +47.1507i&\\
-             -27.9577& -47.1507i&\\
+             -27.9577& +8.4588i&\\
+             -27.9577& -8.4588i&\\
         \end{bmatrix}
     \end{equation}
-
-Na figura a seguir é demonstrado como ficou o design de todos os autovalores do projeto.
-
+    Na figura \ref{fig:autovalores_projeto} é demonstrado como ficou o design de todos os autovalores do projeto.
     \FloatBarrier
     \begin{figure}[htbp]
         \begin{centering}
-            \includegraphics[width=6cm]{img/autovalores_projeto.png}
-            \includegraphics[width=5cm]{img/autovalores_projeto_leg.png}
-            \caption{Simulação do erro dos estados entre o sistema original e o preditor lineares em malha fechada.}
+            \includegraphics[width=7cm]{img/autovalores_projeto.png}
+            \includegraphics[width=7cm]{img/autovalores_projeto_leg.png}
+            \caption{Design dos autovalores do projeto}
             \label{fig:autovalores_projeto}
         \end{centering}
     \end{figure}
     \FloatBarrier
-    
 
-Os autovalores foram utilizados para definir o conjunto de ganhos $L$ do observador de estados através da fórmula de Lyapunov definida em \ref{eq:lyapunov}. No entanto empregou-se a seguinte substituição de variáveis:
- \begin{equation} \label{eq:var_pred}
+    Os autovalores foram utilizados para definir o conjunto de ganhos $L$ do observador de estados através da fórmula de Lyapunov definida em \ref{eq:lyapunov}. No entanto empregou-se a seguinte substituição de variáveis:
+    \begin{equation} \label{eq:var_pred}
         \begin{split}
         A = A^{t}&\\
         B = C^{t}&
         \end{split}
- \end{equation}
+    \end{equation}
 
-Desta maneira, foi encontrada a seguinte matriz de ganhos de realimentação para o observador de estados linear, números arredondados na quarta casa decimal:
+    Desta maneira, foi encontrada a seguinte matriz de ganhos de realimentação para o observador de estados linear, números arredondados na quarta casa decimal:
 
- \begin{equation} \label{eq:ganhos_pred}
+    \begin{equation} \label{eq:ganhos_pred}
         \begin{split}
             \mathbf{L}=\
         \end{split}
@@ -867,10 +864,10 @@ Desta maneira, foi encontrada a seguinte matriz de ganhos de realimentação par
     \FloatBarrier
     \begin{figure}[htbp]
         \begin{centering}
-            \includegraphics[width=8cm]{img/simulaca_temporal_preditor_linear.png}
+            \includegraphics[width=7cm]{img/simulaca_temporal_preditor_linear.png}
             \includegraphics[width=7cm]{img/simulaca_temporal_preditor_linear_erro_leg.png}
             \caption{Simulação da resposta temporal do sistema original com o controlador e o preditor lineares em malha fechada.}
-            \label{fig:simulaca_temporal_linear_perturbacao}
+            \label{fig:simulaca_temporal_preditor_linear}
         \end{centering}
     \end{figure}
     \FloatBarrier
@@ -878,38 +875,44 @@ Desta maneira, foi encontrada a seguinte matriz de ganhos de realimentação par
     \FloatBarrier
     \begin{figure}[htbp]
         \begin{centering}
-            \includegraphics[width=8cm]{img/simulaca_temporal_preditor_linear_erro.png}
+            \includegraphics[width=7cm]{img/simulaca_temporal_preditor_linear_erro.png}
             \includegraphics[width=7cm]{img/simulaca_temporal_preditor_linear_erro_leg.png}
             \caption{Simulação do erro dos estados entre o sistema original e o preditor lineares em malha fechada.}
-            \label{fig:simulaca_temporal_linear_perturbacao}
+            \label{fig:simulaca_temporal_preditor_linear_erro}
         \end{centering}
     \end{figure}
     \FloatBarrier
 
-    O desempenho do sistema real controlado em malha fechada com restrição dos estados observáveis ficou um pouco pior quando comparado com a situação onde todos os estados são observáveis. Especialmente durante os transitórios da perturbação. No entanto, para pequenas variações, o controle baseado em realimentação de estados de um observador linear se mostrou satisfatório.
-
-    \section{Resultados}
+    Houve uma piora no desempenho do do sistema real controlado em malha fechada quando se aplicou a restrição dos estados observáveis, quando comparado com a situação onde todos os estados são observáveis. Especialmente durante os transitórios da perturbação. No entanto, para pequenas variações, o controle baseado em realimentação de estados de um observador linear se mostrou satisfatório.
+    
     \section{Conclusão}
+
+    É possível concluir com este trabalho que um sistema não linear pode ser controlado utilizando técnicas de controle de sistemas lineares, desde que seja possível realizar a construção de mu modelo matemático deste sistema que possa ser linearizado na proximidade de um ponto de equilíbrio por meio da expansão em série de Taylor. É possível concluir que um modelo linearizado em espaço de estados do sistema possui comportamento consistente e semelhante ao sistema original para simulações que se afastem pouco do ponto de equilíbrio escolhido para a linearização. 
+    Dentro do escopo da análise da estabilidade do sistema autônomo, a linearização não altera a característica de estabilidade do sistema em malha aberta, quando comparado com a característica de estabilidade do sistema original. Desta forma é possível aplicar os critérios de avaliação de estabilidade para o sistema linearizado e os resultados obtidos serão consistentes se comparados com o sistema original. 
+    Dentro do escopo da análise da controlabilidade e da observabilidade do sistema, a linearização não altera as características de controlabilidade e da observabilidade, quando comparado com o sistema original. Desta forma foi possível aplicar as técnicas de análise de sistemas lineares para projetar um observador de estados linear que se comporta de maneira consistente ao sistema original e que inclusive é capaz de estimar estados não mensuráveis deste por meio da realimentação do erro da estimativa dos estados. Foi possível também sintetizar os ganhos do controlador por realimentação de estados que garantisse, simultaneamente, a estabilização do sistema controlado em malha fechada e o desempenho mínimo requerido a projeto para as especificações da resposta transitória para sistemas subamortecidos.
+    Dentro do escopo da validade dos modelos lineares empregados, é possível afirmar que todo o sucesso do projeto de controle está intrinsecamente relacionado a distância entre os estados do sistema linear e o ponto de equilíbrio utilizado para linearização. Todos os parâmetros do modelo do sistema linearizado são dependentes do ponto de equilíbrio escolhido, e por consequência, o erro entre a resposta temporal do sistema real não-linear e do modelo linearizado depende desta diferença de maneira muito sensível.
     
-    \bibliography{references,manual}
+    %\bibliography{references,manual}
     
-    \appendix
-    \section{Lista de siglas e abreviações}
-    \begin{itemize} 
-        \item [$m_s$] Massa suspensa.
-        \item [$m_u$] Massa não suspensa.
-        \item [$b_s$] Coeficiente de amortecimento do amortecedor passivo. 
-        \item [$k_s$] Coeficiente de elasticidade do feixe de molas da suspensão.
-        \item [$k_t$] Coeficiente de elasticidade do pneu.
-        \item [$x_r$] Deslocamento vertical da pista.
-        \item [$x_w$] Deslocamento vertical da roda.
-        \item [$x_c$] Deslocamento vertical da carroceria.
-        \item [$F$] Força aplicada pelo amortecedor ativo ou semi-ativo.
-        \item [$k^{l}_{s}$] Coeficiente de elasticidade do termo linear no modelo não linear do feixe de molas da suspensão.
-        \item [$k^{nl}_{s}$] Coeficiente de elasticidade do termo não linear no modelo não linear do feixe de molas da suspensão.
-        \item [$b^{l}_{s}$] Coeficiente de amortecimento do termo da faixa de operação linear do amortecedor.
-        \item [$b^{l}_{s}$] Coeficiente de amortecimento do termo da faixa de operação não linear do amortecedor.
-        \item [$b^{y}_{s}$] Coeficiente que representa a característica  de comportamento assimétrico do amortecedor.
-    \end{itemize}
-    
+    %\appendix
+    %\section{Lista de siglas e abreviações}
+    %\begin{itemize} 
+   %     \item [$m_s$] Massa suspensa.
+%        \item [$m_u$] Massa não suspensa.
+ %       \item [$b_s$] Coeficiente de amortecimento do amortecedor passivo. 
+   %     \item [$k_s$] Coeficiente de elasticidade do feixe de molas da suspensão.
+   %     \item [$k_t$] Coeficiente de elasticidade do pneu.
+     %   \item [$x_r$] Deslocamento vertical da pista.
+ %       \item [$x_w$] Deslocamento vertical da roda.
+ %       \item [$x_c$] Deslocamento vertical da carroceria.
+     %   \item [$\dot{x}_w$] Velocidade vertical da roda.
+  %      \item [$\dot{x}_c$] Velocidade vertical da carroceria.
+  %      \item [$F$] Força aplicada pelo amortecedor ativo ou semi-ativo.
+ %       \item [$k^{l}_{s}$] Coeficiente de elasticidade do termo linear no modelo %não linear do feixe de olas da suspensão.
+ %       \item [$k^{nl}_{s}$] Coeficiente de elasticidade do termo não linear no %modelo não linear do feixe de molas da suspensão.
+ %       \item [$b^{l}_{s}$] Coeficiente de amortecimento do termo da faixa de %operação linear do amortecedor.
+  %     \item [$b^{l}_{s}$] Coeficiente de amortecimento do termo da faixa de %operação não linear do amortecedor.
+   %     \item [$b^{y}_{s}$] Coeficiente que representa a característica  de %comportamento assimétrico do amortecedor.
+   % \end{itemize}
+   % \listoffigures
 \end{document}
